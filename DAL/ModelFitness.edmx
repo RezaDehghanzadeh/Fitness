@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FitnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Context" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="id" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DailyVOD">
+          <Key>
+            <PropertyRef Name="DVID" />
+          </Key>
+          <Property Name="DVID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="TypeVODID" Type="int" />
+          <Property Name="TypeVODStr" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Duration" Type="float" Nullable="false" />
+          <Property Name="ItemVOD" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DiscountCode">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="percentage" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="percentage" Type="int" Nullable="false" />
+          <Property Name="PackageName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Img" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="IsBanner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UIDorTELLNUMBER" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ActionType" Type="int" Nullable="false" />
+          <Property Name="Result" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Exception" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MovementTraining">
+          <Key>
+            <PropertyRef Name="MTID" />
+          </Key>
+          <Property Name="MTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VideoAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubPart" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Movement" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Filter" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovementTrainingDetail">
+          <Key>
+            <PropertyRef Name="MTDID" />
+          </Key>
+          <Property Name="MTDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MTID" Type="int" Nullable="false" />
+          <Property Name="ImgName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContextDetail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime" Nullable="false" />
+          <Property Name="PayStatus" Type="bit" Nullable="false" />
+          <Property Name="ReciverInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProductsInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsDelivered" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="OID" Type="int" Nullable="false" />
+          <Property Name="BuyID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="bigint" Nullable="false" />
+          <Property Name="StartMoment" Type="datetime" Nullable="false" />
+          <Property Name="DargahState" Type="int" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="TrackingNumber" Type="nvarchar(max)" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="EndMoment" Type="datetime" />
+          <Property Name="IsReverse" Type="bit" />
+          <Property Name="FinalState" Type="int" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Context" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ImageAddress" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="specifications" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="float" Nullable="false" />
+          <Property Name="Img" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Available" Type="bit" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseZarinpalLog">
+          <Key>
+            <PropertyRef Name="ZPID" />
+          </Key>
+          <Property Name="ZPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Autohority" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RefID" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="PayDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="USHID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="CatName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SequenceNum" Type="int" Nullable="false" />
+          <Property Name="IsBanner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TellNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="nvarchar(max)" />
+          <Property Name="FBToken" Type="nvarchar(max)" />
+          <Property Name="ActiveCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="JoinDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+          <Property Name="RewardState" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="SecretKey" Type="nvarchar" MaxLength="25" />
+          <Property Name="AppVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="APIVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Access" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="FamilyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodeMeli" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="UserBasket">
+          <Key>
+            <PropertyRef Name="UCID" />
+          </Key>
+          <Property Name="UCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="PID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBought">
+          <Key>
+            <PropertyRef Name="UBID" />
+          </Key>
+          <Property Name="UBID" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="BID" Type="int" Nullable="false" />
+          <Property Name="BuyTime" Type="datetime" Nullable="false" />
+          <Property Name="WaybillNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserMessage">
+          <Key>
+            <PropertyRef Name="UMID" />
+          </Key>
+          <Property Name="UMID" Type="int" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Seen" Type="bit" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserShipping">
+          <Key>
+            <PropertyRef Name="USHID" />
+          </Key>
+          <Property Name="USHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="ProductsID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SendingTime" Type="datetime" />
+          <Property Name="Cost" Type="float" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+          <Property Name="DiscountCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserVOD">
+          <Key>
+            <PropertyRef Name="UVID" />
+          </Key>
+          <Property Name="UVID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="VID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="TypeVODID" Type="int" />
+          <Property Name="TypeVODStr" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Duration" Type="float" Nullable="false" />
+          <Property Name="ItemVOD" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FitnessModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyVOD" EntityType="Self.DailyVOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovementTraining" EntityType="Self.MovementTraining" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovementTrainingDetail" EntityType="Self.MovementTrainingDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseZarinpalLog" EntityType="Self.PurchaseZarinpalLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBasket" EntityType="Self.UserBasket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBought" EntityType="Self.UserBought" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserShipping" EntityType="Self.UserShipping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserVOD" EntityType="Self.UserVOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscountCode" EntityType="Self.DiscountCode" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DiscountCode].[Code] AS [Code], 
+    [DiscountCode].[percentage] AS [percentage], 
+    [DiscountCode].[PackageName] AS [PackageName]
+    FROM [dbo].[DiscountCode] AS [DiscountCode]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitnessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FitnessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articles" EntityType="FitnessModel.Article" />
+          <EntitySet Name="Categories" EntityType="FitnessModel.Category" />
+          <EntitySet Name="Contents" EntityType="FitnessModel.Content" />
+          <EntitySet Name="DailyVODs" EntityType="FitnessModel.DailyVOD" />
+          <EntitySet Name="Features" EntityType="FitnessModel.Feature" />
+          <EntitySet Name="Logs" EntityType="FitnessModel.Log" />
+          <EntitySet Name="MovementTrainings" EntityType="FitnessModel.MovementTraining" />
+          <EntitySet Name="MovementTrainingDetails" EntityType="FitnessModel.MovementTrainingDetail" />
+          <EntitySet Name="Orders" EntityType="FitnessModel.Order" />
+          <EntitySet Name="Pays" EntityType="FitnessModel.Pay" />
+          <EntitySet Name="Posts" EntityType="FitnessModel.Post" />
+          <EntitySet Name="Products" EntityType="FitnessModel.Product" />
+          <EntitySet Name="PurchaseZarinpalLogs" EntityType="FitnessModel.PurchaseZarinpalLog" />
+          <EntitySet Name="Shops" EntityType="FitnessModel.Shop" />
+          <EntitySet Name="Users" EntityType="FitnessModel.User" />
+          <EntitySet Name="UserBaskets" EntityType="FitnessModel.UserBasket" />
+          <EntitySet Name="UserBoughts" EntityType="FitnessModel.UserBought" />
+          <EntitySet Name="UserMessages" EntityType="FitnessModel.UserMessage" />
+          <EntitySet Name="UserShippings" EntityType="FitnessModel.UserShipping" />
+          <EntitySet Name="UserVODs" EntityType="FitnessModel.UserVOD" />
+          <EntitySet Name="DiscountCodes" EntityType="FitnessModel.DiscountCode" />
+        </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Context" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DailyVOD">
+          <Key>
+            <PropertyRef Name="DVID" />
+          </Key>
+          <Property Name="DVID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TypeVODID" Type="Int32" />
+          <Property Name="TypeVODStr" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Double" Nullable="false" />
+          <Property Name="ItemVOD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="IsBanner" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UIDorTELLNUMBER" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ActionType" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MovementTraining">
+          <Key>
+            <PropertyRef Name="MTID" />
+          </Key>
+          <Property Name="MTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubPart" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Movement" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Filter" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MovementTrainingDetail">
+          <Key>
+            <PropertyRef Name="MTDID" />
+          </Key>
+          <Property Name="MTDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MTID" Type="Int32" Nullable="false" />
+          <Property Name="ImgName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContextDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PayStatus" Type="Boolean" Nullable="false" />
+          <Property Name="ReciverInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductsInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="OID" Type="Int32" Nullable="false" />
+          <Property Name="BuyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" Nullable="false" />
+          <Property Name="StartMoment" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DargahState" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrackingNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndMoment" Type="DateTime" Precision="3" />
+          <Property Name="IsReverse" Type="Boolean" />
+          <Property Name="FinalState" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ImageAddress" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="specifications" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Double" Nullable="false" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseZarinpalLog">
+          <Key>
+            <PropertyRef Name="ZPID" />
+          </Key>
+          <Property Name="ZPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Autohority" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefID" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USHID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="CatName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SequenceNum" Type="Int32" Nullable="false" />
+          <Property Name="IsBanner" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TellNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FBToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Credit" Type="Int32" Nullable="false" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RewardState" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="SecretKey" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="AppVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APIVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodeMeli" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserBasket">
+          <Key>
+            <PropertyRef Name="UCID" />
+          </Key>
+          <Property Name="UCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBought">
+          <Key>
+            <PropertyRef Name="UBID" />
+          </Key>
+          <Property Name="UBID" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="BID" Type="Int32" Nullable="false" />
+          <Property Name="BuyTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WaybillNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserMessage">
+          <Key>
+            <PropertyRef Name="UMID" />
+          </Key>
+          <Property Name="UMID" Type="Int32" Nullable="false" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Seen" Type="Boolean" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserShipping">
+          <Key>
+            <PropertyRef Name="USHID" />
+          </Key>
+          <Property Name="USHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="ProductsID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SendingTime" Type="DateTime" Precision="3" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="DiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserVOD">
+          <Key>
+            <PropertyRef Name="UVID" />
+          </Key>
+          <Property Name="UVID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="VID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TypeVODID" Type="Int32" />
+          <Property Name="TypeVODStr" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Double" Nullable="false" />
+          <Property Name="ItemVOD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DiscountCode">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="percentage" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentage" Type="Int32" Nullable="false" />
+          <Property Name="PackageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitnessModelStoreContainer" CdmEntityContainer="FitnessEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="FitnessModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FitnessModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="FitnessModel.Content">
+              <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyVODs">
+            <EntityTypeMapping TypeName="FitnessModel.DailyVOD">
+              <MappingFragment StoreEntitySet="DailyVOD">
+                <ScalarProperty Name="ItemVOD" ColumnName="ItemVOD" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TypeVODStr" ColumnName="TypeVODStr" />
+                <ScalarProperty Name="TypeVODID" ColumnName="TypeVODID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="VID" ColumnName="VID" />
+                <ScalarProperty Name="DVID" ColumnName="DVID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="FitnessModel.Feature">
+              <MappingFragment StoreEntitySet="Feature">
+                <ScalarProperty Name="IsBanner" ColumnName="IsBanner" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="FitnessModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="UIDorTELLNUMBER" ColumnName="UIDorTELLNUMBER" />
+                <ScalarProperty Name="LID" ColumnName="LID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovementTrainings">
+            <EntityTypeMapping TypeName="FitnessModel.MovementTraining">
+              <MappingFragment StoreEntitySet="MovementTraining">
+                <ScalarProperty Name="Filter" ColumnName="Filter" />
+                <ScalarProperty Name="Movement" ColumnName="Movement" />
+                <ScalarProperty Name="SubPart" ColumnName="SubPart" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="VideoAddress" ColumnName="VideoAddress" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="MTID" ColumnName="MTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovementTrainingDetails">
+            <EntityTypeMapping TypeName="FitnessModel.MovementTrainingDetail">
+              <MappingFragment StoreEntitySet="MovementTrainingDetail">
+                <ScalarProperty Name="ContextDetail" ColumnName="ContextDetail" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="MTID" ColumnName="MTID" />
+                <ScalarProperty Name="MTDID" ColumnName="MTDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FitnessModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="ProductsInfo" ColumnName="ProductsInfo" />
+                <ScalarProperty Name="ReciverInfo" ColumnName="ReciverInfo" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="OID" ColumnName="OID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pays">
+            <EntityTypeMapping TypeName="FitnessModel.Pay">
+              <MappingFragment StoreEntitySet="Pay">
+                <ScalarProperty Name="FinalState" ColumnName="FinalState" />
+                <ScalarProperty Name="IsReverse" ColumnName="IsReverse" />
+                <ScalarProperty Name="EndMoment" ColumnName="EndMoment" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="DargahState" ColumnName="DargahState" />
+                <ScalarProperty Name="StartMoment" ColumnName="StartMoment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="FitnessModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="ImageAddress" ColumnName="ImageAddress" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FitnessModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="specifications" ColumnName="specifications" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseZarinpalLogs">
+            <EntityTypeMapping TypeName="FitnessModel.PurchaseZarinpalLog">
+              <MappingFragment StoreEntitySet="PurchaseZarinpalLog">
+                <ScalarProperty Name="USHID" ColumnName="USHID" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RefID" ColumnName="RefID" />
+                <ScalarProperty Name="Autohority" ColumnName="Autohority" />
+                <ScalarProperty Name="ZPID" ColumnName="ZPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="FitnessModel.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="IsBanner" ColumnName="IsBanner" />
+                <ScalarProperty Name="SequenceNum" ColumnName="SequenceNum" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FitnessModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="CodeMeli" ColumnName="CodeMeli" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
+                <ScalarProperty Name="APIVersion" ColumnName="APIVersion" />
+                <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+                <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="RewardState" ColumnName="RewardState" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="FBToken" ColumnName="FBToken" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TellNumber" ColumnName="TellNumber" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBaskets">
+            <EntityTypeMapping TypeName="FitnessModel.UserBasket">
+              <MappingFragment StoreEntitySet="UserBasket">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UCID" ColumnName="UCID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBoughts">
+            <EntityTypeMapping TypeName="FitnessModel.UserBought">
+              <MappingFragment StoreEntitySet="UserBought">
+                <ScalarProperty Name="WaybillNumber" ColumnName="WaybillNumber" />
+                <ScalarProperty Name="BuyTime" ColumnName="BuyTime" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UBID" ColumnName="UBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMessages">
+            <EntityTypeMapping TypeName="FitnessModel.UserMessage">
+              <MappingFragment StoreEntitySet="UserMessage">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="UMID" ColumnName="UMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserShippings">
+            <EntityTypeMapping TypeName="FitnessModel.UserShipping">
+              <MappingFragment StoreEntitySet="UserShipping">
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="SendingTime" ColumnName="SendingTime" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="USHID" ColumnName="USHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserVODs">
+            <EntityTypeMapping TypeName="FitnessModel.UserVOD">
+              <MappingFragment StoreEntitySet="UserVOD">
+                <ScalarProperty Name="ItemVOD" ColumnName="ItemVOD" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TypeVODStr" ColumnName="TypeVODStr" />
+                <ScalarProperty Name="TypeVODID" ColumnName="TypeVODID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="VID" ColumnName="VID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UVID" ColumnName="UVID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountCodes">
+            <EntityTypeMapping TypeName="FitnessModel.DiscountCode">
+              <MappingFragment StoreEntitySet="DiscountCode">
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

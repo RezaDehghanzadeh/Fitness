@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4f7dcf88f5244f73999b072d5d57461d" Name="Diagram1">
+        <EntityTypeShape EntityType="FitnessModel.Article" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.Category" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.Content" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FitnessModel.DailyVOD" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FitnessModel.Feature" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.Log" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FitnessModel.MovementTraining" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.MovementTrainingDetail" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FitnessModel.Order" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FitnessModel.Pay" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FitnessModel.Post" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FitnessModel.Product" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FitnessModel.PurchaseZarinpalLog" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.Shop" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FitnessModel.User" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FitnessModel.UserBasket" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FitnessModel.UserBought" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FitnessModel.UserMessage" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FitnessModel.UserShipping" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FitnessModel.UserVOD" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FitnessModel.DiscountCode" Width="1.5" PointX="12.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
