@@ -405,7 +405,7 @@
             this.richTextBoxGigaVOD = new System.Windows.Forms.RichTextBox();
             this.label49 = new System.Windows.Forms.Label();
             this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImg)).BeginInit();
             this.groupBox13.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -1086,6 +1086,8 @@
             // 
             // button8
             // 
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button8.Font = new System.Drawing.Font("B Nazanin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.button8.Location = new System.Drawing.Point(303, 491);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(234, 23);
@@ -4313,7 +4315,7 @@
             // 
             // richTextBoxGigaVOD
             // 
-            this.richTextBoxGigaVOD.Location = new System.Drawing.Point(873, 29);
+            this.richTextBoxGigaVOD.Location = new System.Drawing.Point(873, 68);
             this.richTextBoxGigaVOD.Name = "richTextBoxGigaVOD";
             this.richTextBoxGigaVOD.Size = new System.Drawing.Size(246, 449);
             this.richTextBoxGigaVOD.TabIndex = 38;
@@ -4323,7 +4325,7 @@
             // 
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label49.Location = new System.Drawing.Point(961, 6);
+            this.label49.Location = new System.Drawing.Point(962, 45);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(72, 20);
             this.label49.TabIndex = 39;
@@ -4331,7 +4333,8 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(876, 484);
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button14.Location = new System.Drawing.Point(876, 519);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(239, 30);
             this.button14.TabIndex = 40;
@@ -4339,14 +4342,18 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // button15
+            // button11
             // 
-            this.button15.Location = new System.Drawing.Point(929, 517);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(138, 30);
-            this.button15.TabIndex = 41;
-            this.button15.Text = "پاک کردن مقادیر";
-            this.button15.UseVisualStyleBackColor = true;
+            this.button11.BackColor = System.Drawing.Color.SandyBrown;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button11.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button11.Location = new System.Drawing.Point(905, 13);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(193, 30);
+            this.button11.TabIndex = 41;
+            this.button11.Text = "مشاهده و حذف وادها";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // FormWOD
             // 
@@ -4354,7 +4361,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Tan;
             this.ClientSize = new System.Drawing.Size(1124, 551);
-            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.label49);
             this.Controls.Add(this.richTextBoxGigaVOD);
@@ -5072,9 +5079,9 @@
         private System.Windows.Forms.RichTextBox richTextBoxGigaVOD;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.GroupBox groupBox132;
         private System.Windows.Forms.ComboBox comboBox10;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }

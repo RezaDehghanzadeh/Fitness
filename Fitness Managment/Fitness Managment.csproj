@@ -65,6 +65,12 @@
     <Compile Include="FormAmoozesh.Designer.cs">
       <DependentUpon>FormAmoozesh.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDailyVOD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDailyVOD.Designer.cs">
+      <DependentUpon>FormDailyVOD.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMahsoolat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAmoozesh.resx">
       <DependentUpon>FormAmoozesh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDailyVOD.resx">
+      <DependentUpon>FormDailyVOD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMahsoolat.resx">
       <DependentUpon>FormMahsoolat.cs</DependentUpon>

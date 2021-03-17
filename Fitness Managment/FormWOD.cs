@@ -863,6 +863,27 @@ namespace Fitness_Managment
 
             try
             {
+
+                var DistanceMale = textBox132.Text != "" ? float.Parse(textBox132.Text) : V;
+                var HeightFeMale = textBox131.Text != "" ? float.Parse(textBox131.Text) : V;
+                var HeightMale = textBox134.Text != "" ? float.Parse(textBox134.Text) : V;
+                var Movement = (string)comboBox5.SelectedItem;
+                var MRest = textBox126.Text != "" ? float.Parse(textBox126.Text) : V;
+                var MRestBetSet = textBox123.Text != "" ? float.Parse(textBox123.Text) : V;
+                var MRound = textBox125.Text != "" ? float.Parse(textBox113.Text) : V;
+                var MSet = textBox137.Text != "" ? float.Parse(textBox137.Text) : V;
+                var MWork = textBox127.Text != "" ? float.Parse(textBox127.Text) : V;
+                var Part = (string)comboBox4.SelectedItem;
+                var Rep = textBox136.Text != "" ? float.Parse(textBox136.Text) : V;
+                var RestBet = textBox122.Text != "" ? float.Parse(textBox122.Text) : V;
+                var SubPart = (string)comboBox6.SelectedItem;
+                var TimeFeMale = textBox128.Text != "" ? float.Parse(textBox128.Text) : V;
+                var TimeMale = textBox129.Text != "" ? float.Parse(textBox129.Text) : V;
+                var WeightFeMale = textBox133.Text != "" ? float.Parse(textBox133.Text) : V;
+                var WeightMale = textBox135.Text != "" ? float.Parse(textBox135.Text) : V;
+                var Call = textBox124.Text != "" ? float.Parse(textBox124.Text) : V;
+                var DistanceFeMale = textBox130.Text != "" ? float.Parse(textBox130.Text) : V;
+
                 mov.S2 = new MovDetail()
                 {
                     DistanceMale = textBox132.Text != "" ? float.Parse(textBox132.Text) : V,
@@ -2171,7 +2192,16 @@ namespace Fitness_Managment
                 IsPreMade = true
             };
 
-            await PostToServerVOD(mVOD);
+            string resStr = await PostToServerVOD(mVOD);
+            int ResInt = Int32.Parse(resStr);
+            if (ResInt > 0)
+            {
+                MessageBox.Show("با موفقیت ارسال شد");
+            }
+            else
+            {
+                MessageBox.Show("ظاهرا با مشکل به وجود آمده");
+            }
         }
 
         public async Task<string> PostToServerVOD(Com.VOD mVOD)
@@ -2203,7 +2233,7 @@ namespace Fitness_Managment
             {
                 Console.WriteLine(eeee.Message);
                 MessageBox.Show("احتملا حجم عکس زیاد است");
-                return "err";
+                return "-199";
             }
         }
 
@@ -2286,6 +2316,11 @@ namespace Fitness_Managment
         }
 
         private void textBoxTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
         {
 
         }

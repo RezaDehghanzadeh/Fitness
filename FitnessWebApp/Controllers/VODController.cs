@@ -24,6 +24,13 @@ namespace FitnessWebApp.Controllers
             return BLL.VOD.DeleteVOD(VID);
         }
 
+        [AllowAnonymous]
+        [AcceptVerbs("Get")]
+        public bool DeleteDailyVOD(int DVID)
+        {
+            return BLL.VOD.DeleteDailyVOD(DVID);
+        }
+
 
 
         [AllowAnonymous]
@@ -69,6 +76,19 @@ namespace FitnessWebApp.Controllers
         public List<Com.MiniVOD> GetPreMadeVOD()
         {
             return BLL.VOD.GetAllPreMadeVOD();
+        }
+        [AllowAnonymous]
+        [AcceptVerbs("Get")]
+        public List<Com.DailyVOD> GetAllDailyVOD()
+        {
+            return BLL.VOD.GetAllDailyVODs();
+        }
+
+        [AllowAnonymous]
+        [AcceptVerbs("Get")]
+        public List<Com.DailyVOD> GetDailyVOD(DateTime Start, DateTime End)
+        {
+            return BLL.VOD.GetDailyVODs(Start, End);
         }
 
         [AllowAnonymous]
@@ -638,33 +658,50 @@ namespace FitnessWebApp.Controllers
         //    }
         //}
 
-
-        // GET: api/VOD
-        public IEnumerable<string> Get()
+        [AllowAnonymous]
+        [AcceptVerbs("Post")]
+        public async Task<IHttpActionResult> PostDailyVOD()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                Com.DailyVOD dailyVOD = new Com.DailyVOD();
+
+                foreach (var itemContent in filesReadToProvider.Contents)
+                {
+                    if (itemContent.Headers.ContentDisposition.Name == "Object")
+                    {
+                        var jsonString = await itemContent.ReadAsStringAsync();
+                        var serializer = new JavaScriptSerializer();
+                        dailyVOD = serializer.Deserialize<Com.DailyVOD>(jsonString);
+
+                        int ResAdd = BLL.VOD.AddDailyVOD(dailyVOD);
+                        if (ResAdd < 0)
+                        {
+                            return BadRequest();
+                        }
+                    }
+
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ee)
+            {
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostDailyVOD, "", -400, ee.Message); }).Start();
+                return BadRequest();
+            }
         }
 
-        // GET: api/VOD/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/VOD
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/VOD/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/VOD/5
-        public void Delete(int id)
-        {
-        }
     }
 
 

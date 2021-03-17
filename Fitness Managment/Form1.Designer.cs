@@ -43,6 +43,7 @@
             // buttonAmoozesh
             // 
             this.buttonAmoozesh.BackColor = System.Drawing.Color.Gold;
+            this.buttonAmoozesh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAmoozesh.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.buttonAmoozesh.Location = new System.Drawing.Point(-1, -3);
             this.buttonAmoozesh.Name = "buttonAmoozesh";
@@ -55,6 +56,7 @@
             // buttonProduct
             // 
             this.buttonProduct.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.buttonProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonProduct.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.buttonProduct.Location = new System.Drawing.Point(485, -3);
             this.buttonProduct.Name = "buttonProduct";
@@ -67,6 +69,7 @@
             // buttonPrivateVOD
             // 
             this.buttonPrivateVOD.BackColor = System.Drawing.Color.Aqua;
+            this.buttonPrivateVOD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPrivateVOD.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.buttonPrivateVOD.Location = new System.Drawing.Point(-1, 236);
             this.buttonPrivateVOD.Name = "buttonPrivateVOD";
@@ -79,6 +82,7 @@
             // buttonUser
             // 
             this.buttonUser.BackColor = System.Drawing.Color.LightCoral;
+            this.buttonUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonUser.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.buttonUser.Location = new System.Drawing.Point(353, 191);
             this.buttonUser.Name = "buttonUser";
@@ -101,8 +105,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Tan;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button1.Location = new System.Drawing.Point(305, -3);
+            this.button1.Location = new System.Drawing.Point(307, -3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(182, 198);
             this.button1.TabIndex = 1;
@@ -113,8 +118,9 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DarkViolet;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button2.Location = new System.Drawing.Point(354, 191);
+            this.button2.Location = new System.Drawing.Point(353, 194);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(115, 128);
             this.button2.TabIndex = 5;
@@ -125,13 +131,15 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Crimson;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("B Esfehan", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button3.Location = new System.Drawing.Point(141, 236);
+            this.button3.Location = new System.Drawing.Point(139, 236);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(216, 59);
             this.button3.TabIndex = 6;
             this.button3.Text = "تخصیص واد روزانه";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Management
             // 

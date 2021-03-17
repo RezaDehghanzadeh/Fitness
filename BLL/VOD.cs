@@ -165,6 +165,23 @@ namespace BLL
             }
         }
 
+
+        public static List<Com.DailyVOD> GetAllDailyVODs()
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.DailyVODs.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetAllDailyVODs, " ", -100, e.Message);
+                return null;
+            }
+        }
+
         public static List<Com.DailyVOD> GetDailyVODs(DateTime startDate, DateTime endDate)
         {
             try
@@ -270,6 +287,27 @@ namespace BLL
             catch (Exception e)
             {
                 Log.DoLog(Com.Common.Action.DeleteVOD, VID.ToString(), -100, e.Message);
+                return false;
+            }
+        }
+
+        public static bool DeleteDailyVOD(int DVID)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    Com.DailyVOD mDailyVOD = new Com.DailyVOD() { DVID = DVID };
+                    ent.DailyVODs.Attach(mDailyVOD);
+                    ent.DailyVODs.Remove(mDailyVOD);
+                    ent.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.DeleteVOD, DVID.ToString(), -100, e.Message);
                 return false;
             }
         }

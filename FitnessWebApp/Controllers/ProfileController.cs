@@ -266,12 +266,12 @@ namespace FitnessWebApp.Controllers
                             {
                                 return BadRequest();
                             }
-
+                            MainTID = ResAdd.TID;
                             BLL.User.UpdateTeacher(mTeacher);
                         }
                         else
                         {
-                            mTeacher.TID = BLL.User.AddTeacher(mTeacher);
+                            MainTID = BLL.User.AddTeacher(mTeacher);
                         }
                     }
                     else if (itemContent.Headers.ContentDisposition.Name == "File")
@@ -301,22 +301,7 @@ namespace FitnessWebApp.Controllers
                 return BadRequest();
             }
         }
-
-
-        // POST: api/Profile
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Profile/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Profile/5
-        public void Delete(int id)
-        {
-        }
+       
 
         //////////////////////////////////////////////////
         /// Help API For Controler       /////////////////

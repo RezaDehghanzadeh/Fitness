@@ -104,5 +104,21 @@ namespace Fitness_Managment
             }
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormDailyVOD Formawod = (FormDailyVOD)Application.OpenForms["FormDailyVOD"];
+            if (Formawod != null)
+            {
+                //frmLogin.Visible = true; Uncomment this line if form still not get visible.
+                Formawod.Show();
+            }
+            else
+            {
+                Formawod = new FormDailyVOD();
+                Formawod.Show();
+            }
+            this.Hide();
+        }
     }
 }
