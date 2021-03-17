@@ -12,37 +12,54 @@ namespace Com
         {
             AddUser,
             AddProduct,
+            AddTeacher,
             AddMovementTraining,
             AddMovementTrainingDetail,
             AddPay,
             AddOrder,
+            AddVOD,
+            AddComment,
             UpdateUser,
             UpdateUserCode,
             UpdateOrderPayStatus,
             UpdateOrderDeliverStatus,
+            UpdateUserAfterLogin,
+            UpdateUserInfo,
+            UpdateTeacher,
             SignUpUser,
             ActiveUser,
             GetUser,
             GetMovementTraining,
             GetMovementTrainingByFilter,
             GetUserByTellNumber,
+            GetTeacherByID,
             GetPayByID,
             GetPayByBuyID,
             GetAllOrders,
+            GetLastUserInfo,
+            GetVOD,
+            GetVODByName,
+            GetCommentByPID,
+            GetDailyVODs,
             Logon,
             Login,
             SendSMS,
             PostMovementTraining,
             GetAllMovementTrainingDetailByID,
             GetAllMovementTraining,
+            GetAllPreMadeVOD,
             UpdateMovementDetailContent,
             UpdatePayAfterConfirm,
+            UpdateVOD,
+            UpdateMovement,
             PostMovementDetail,
             PostUpdateMovementTrainingContext,
             PostProduct,
             PostUpdateProduct,
-            UpdateMovement,
             PostMovement,
+            PostVOD,
+            PostComment,
+            PostUpdateTeacher,
             GetLoginByCode,
             GetUserVOD,
             addUserVOD,
@@ -55,16 +72,21 @@ namespace Com
             AddUserBought,
             GetDailyVOD,
             GetAllUserBought,
+            GetAllTeacher,
             GetAllUserVOD,
             GetAllProduct,
             GetAllBookProduct,
+            GetAllDoreProduct,
             GetAllUserMessage,
             addUserMessage,
             AddDailyVOD,
             GetProductByID,
             GetProductByCatID,
+            GetProductByIDs,
             GetCategories,
             DeleteImg,
+            DeleteVOD,
+            DeleteComment,
             GetMegaMovementTraining,
             CallBackPayResult,
             Buy,
@@ -175,5 +197,81 @@ namespace Com
         public string Address { get; set; }
         public string CodePosti { get; set; }
         public string City { get; set; }
+        public string Ostan { get; set; }
     }
+    public class MiniUser
+    {
+        public int UID { get; set; }
+        public string TellNumber { get; set; }
+        public string Email { get; set; }
+        public int Credit { get; set; }
+        public System.DateTime JoinDate { get; set; }
+        public System.DateTime LastLogin { get; set; }
+        public int RewardState { get; set; }
+        public string Name { get; set; }
+        public string FamilyName { get; set; }
+        public string NickName { get; set; }
+        public string CodeMeli { get; set; }
+        public string Address { get; set; }
+        public string CodePosti { get; set; }
+        public string City { get; set; }
+        public string Ostan { get; set; }
+    }
+    public class UserInfo
+    {
+        public int UID { get; set; }
+        public string TellNumber { get; set; }
+        public string Name { get; set; }
+        public string FamilyName { get; set; }
+        public string NickName { get; set; }
+        public string Email { get; set; }
+
+        public string CodeMeli { get; set; }
+        public string Address { get; set; }
+        public string CodePosti { get; set; }
+        public string City { get; set; }
+        public string Ostan { get; set; }
+    }
+    public class ResLastUserInfo
+    {
+        public MiniUser MiniUser { get; set; }
+        public List<Com.UserBought> userBought { get; set; }
+        public List<Com.UserMessage> userMessage { get; set; }
+    }
+
+
+    public class SpecDore
+    {
+        public string State { get; set; } // Normal, ComingSoon, Expire , TamdidShode
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int CourseDuration { get; set; }
+        public List<Com.Teacher> Teachers { get; set; }
+        public List<Sess> Sessions { get; set; }
+        public List<string> agenda { get; set; }
+        public List<FQ> FAQ { get; set; }
+    }
+
+    public class FQ
+    {
+        public string Question { get; set; }
+        public string Answer { get; set; }
+    }
+
+    public class Sess
+    {
+        public string Title { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+    }
+
+    public class MiniVOD
+    {
+        public int VID { get; set; }
+        public string Name { get; set; }
+        public string Info { get; set; }
+
+    }
+
+
 }

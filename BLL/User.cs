@@ -20,7 +20,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetLoginByCode, Tell, -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetLoginByCode, Tell, -100, e.Message);
+                });
                 return null;
             }
         }
@@ -36,7 +39,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetUserVOD, UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetUserVOD, UID.ToString(), -100, e.Message);
+                });
                 return null;
             }
         }
@@ -52,7 +58,47 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllUserBought, UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllUserBought, UID.ToString(), -100, e.Message);
+                });
+                return null;
+            }
+        }
+
+        public static List<Com.Teacher> GetAllTeacher()
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.Teachers.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllTeacher, "", -100, e.Message);
+                });
+                return null;
+            }
+        }
+        public static Com.Teacher GetTeacherByID(int TID)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.Teachers.Where(T => T.TID == TID).SingleOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetTeacherByID, "", -100, e.Message);
+                });
                 return null;
             }
         }
@@ -67,7 +113,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllUserVOD, UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllUserVOD, UID.ToString(), -100, e.Message);
+                });
                 return null;
             }
         }
@@ -82,7 +131,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllUserMessage, UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllUserMessage, UID.ToString(), -100, e.Message);
+                });
                 return null;
             }
         }
@@ -97,7 +149,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetDailyVOD, date.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetDailyVOD, date.ToString(), -100, e.Message);
+                });
                 return null;
             }
         }
@@ -115,7 +170,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.addUserVOD, userVOD.UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.addUserVOD, userVOD.UID.ToString(), -100, e.Message);
+                });
                 return -100;
             }
         }
@@ -134,7 +192,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.addUserMessage, userMessage.UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.addUserMessage, userMessage.UID.ToString(), -100, e.Message);
+                });
                 return -100;
             }
         }
@@ -156,7 +217,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateUserVOD, mUserVOD.UVID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserVOD, mUserVOD.UVID.ToString(), -100, e.Message);
+                });
                 return false;
             }
         }
@@ -175,7 +239,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateUserVOD, mUserMessage.UMID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserVOD, mUserMessage.UMID.ToString(), -100, e.Message);
+                });
                 return false;
             }
         }
@@ -193,7 +260,31 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddUser, mUser.TellNumber, -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddUser, mUser.TellNumber, -100, e.Message);
+                });
+                return -100;
+            }
+        }
+        public static int AddTeacher(Com.Teacher mTeacher)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.Teachers.Add(mTeacher);
+                    ent.SaveChanges();
+
+                    return mTeacher.TID;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddTeacher, "", -100, e.Message);
+                });
                 return -100;
             }
         }
@@ -211,7 +302,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddUserBought, mUserBought.UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddUserBought, mUserBought.UID.ToString(), -100, e.Message);
+                });
                 return -100;
             }
         }
@@ -229,7 +323,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddUserBought, mDailyVOD.VID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddUserBought, mDailyVOD.VID.ToString(), -100, e.Message);
+                });
                 return -100;
             }
         }
@@ -244,7 +341,8 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetUser, UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.GetUser, UID.ToString(), -100, e.Message); });
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.GetUser, UID.ToString(), -100, e.InnerException.Message); });
                 return null;
             }
         }
@@ -259,12 +357,15 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetUserByTellNumber, TellNumber, -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetUserByTellNumber, TellNumber, -100, e.Message);
+                });
                 return null;
             }
         }
 
-        public static bool UpdateUser(Com.User mUser)
+        public static bool UpdateUserAfterLogin(Com.User mUser)
         {
             try
             {
@@ -282,7 +383,41 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateUser, mUser.UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserAfterLogin, mUser.UID.ToString(), -100, e.Message);
+                });
+                return false;
+            }
+        }
+        public static bool UpdateUserInfo(Com.User mUser)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.Users.Attach(mUser);
+                    var Entry = ent.Entry(mUser);
+                    Entry.Property(ex => ex.CodeMeli).IsModified = true;
+                    Entry.Property(ex => ex.Email).IsModified = true;
+                    Entry.Property(ex => ex.FamilyName).IsModified = true;
+                    Entry.Property(ex => ex.NickName).IsModified = true;
+                    Entry.Property(ex => ex.Name).IsModified = true;
+                    Entry.Property(ex => ex.Address).IsModified = true;
+                    Entry.Property(ex => ex.CodePosti).IsModified = true;
+                    Entry.Property(ex => ex.City).IsModified = true;
+                    Entry.Property(ex => ex.Ostan).IsModified = true;
+
+                    ent.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserInfo, mUser.UID.ToString(), -100, e.Message);
+                });
                 return false;
             }
         }
@@ -302,11 +437,36 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateUserCode, mUser.UID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserCode, mUser.UID.ToString(), -100, e.Message);
+                });
                 return false;
             }
         }
-
+        public static bool UpdateTeacher(Com.Teacher mTeacher)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.Teachers.Attach(mTeacher);
+                    var Entry = ent.Entry(mTeacher);
+                    Entry.Property(ex => ex.Name).IsModified = true;
+                    Entry.Property(ex => ex.ScienceRanking).IsModified = true;
+                    ent.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateTeacher, mTeacher.TID.ToString(), -100, e.Message);
+                });
+                return false;
+            }
+        }
 
     }
 }

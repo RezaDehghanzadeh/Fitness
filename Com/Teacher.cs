@@ -12,15 +12,10 @@ namespace Com
     using System;
     using System.Collections.Generic;
     
-    public partial class UserShipping
+    public partial class Teacher
     {
-        public int USHID { get; set; }
-        public int UID { get; set; }
-        public string ProductsID { get; set; }
-        public string Address { get; set; }
-        public Nullable<System.DateTime> SendingTime { get; set; }
-        public double Cost { get; set; }
-        public bool IsPaid { get; set; }
-        public string DiscountCode { get; set; }
+        public int TID { get; set; }
+        public string Name { get; set; }
+        public string ScienceRanking { get; set; }
     }
 }

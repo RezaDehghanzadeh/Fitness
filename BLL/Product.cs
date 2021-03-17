@@ -59,6 +59,21 @@ namespace BLL
                 return null;
             }
         }
+        public static List<Com.Product> GetProductByIDs(List<int> PIDs)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.Products.Where(r => PIDs.Contains(r.PID)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetProductByIDs, " ", -100, e.Message);
+                return null;
+            }
+        }
         public static List<Com.Product> GetAllBookProduct()
         {
             try
@@ -72,6 +87,22 @@ namespace BLL
             {
                 Log.DoLog(Com.Common.Action.GetAllBookProduct, " ", -100, e.Message);
                 Log.DoLog(Com.Common.Action.GetAllBookProduct, " ", -100, e.InnerException.Message);
+                return null;
+            }
+        }
+        public static List<Com.Product> GetAllDoreProduct()
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.Products.Where(W => W.CatID == 2).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetAllDoreProduct, " ", -100, e.Message);
+                Log.DoLog(Com.Common.Action.GetAllDoreProduct, " ", -100, e.InnerException.Message);
                 return null;
             }
         }

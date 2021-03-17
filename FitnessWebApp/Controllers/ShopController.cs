@@ -13,7 +13,61 @@ namespace FitnessWebApp.Controllers
 {
     public class ShopController : ApiController
     {
+        [AllowAnonymous]
+        [AcceptVerbs("Post")]
+        public async Task<IHttpActionResult> PostComment()
+        {
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                Com.Comment mComment = new Com.Comment();
+
+                foreach (var itemContent in filesReadToProvider.Contents)
+                {
+                    if (itemContent.Headers.ContentDisposition.Name == "Object")
+                    {
+                        var jsonString = await itemContent.ReadAsStringAsync();
+                        var serializer = new JavaScriptSerializer();
+                        mComment = serializer.Deserialize<Com.Comment>(jsonString);
+
+                        int ResAdd = BLL.Feedback.AddComment(mComment);
+                        //TODO: Add to product rate.
+                        if (ResAdd < 0)
+                        {
+                            return BadRequest();
+                        }
+                    }
+
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ee)
+            {
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostComment, "", -400, ee.Message); }).Start();
+                return BadRequest();
+            }
+        }
+
         [AcceptVerbs("Get")]
+        [Authorize]
+        public List<Com.Comment> GetCommentOfPID(int PID)
+        {
+            return BLL.Feedback.GetCommentByPID(PID);
+        }
+
+
+        [AcceptVerbs("Get")]
+        [Authorize]
         public List<Com.Category> GetCategories()
         {
             return BLL.Product.GetCategories();
@@ -21,36 +75,52 @@ namespace FitnessWebApp.Controllers
 
 
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public List<Com.Product> GetProductByCatID(int CatID)
         {
             return BLL.Product.GetProductByCatID(CatID);
         }
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public List<Com.Product> GetAllProduct()
         {
             return BLL.Product.GetAllProduct();
         }
 
-
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
+        public List<Com.Product> GetProductByIDs([FromUri] List<int> PIDs)
+        {
+            return BLL.Product.GetProductByIDs(PIDs);
+        }
+        [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public List<Com.Product> GetAllBook()
         {
             return BLL.Product.GetAllBookProduct();
         }
-
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
+        public List<Com.Product> GetAllDore()
+        {
+            return BLL.Product.GetAllDoreProduct();
+        }
+        [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public List<Com.Product> GetAllProductByCategory(int CatID)
         {
             return BLL.Product.GetProductByCatID(CatID);
         }
 
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public Com.Product GetProductByID(int PID)
         {
             return BLL.Product.GetProductByID(PID);
         }
 
         [AcceptVerbs("Post")]
+        [AllowAnonymous]
         public int AddProduct([FromBody] Com.Product product)
         {
             return BLL.Product.AddProduct(product);
@@ -156,6 +226,10 @@ namespace FitnessWebApp.Controllers
                     else if (itemContent.Headers.ContentDisposition.Name == "File")
                     {
                         string rootFolder = @"C:\inetpub\wwwroot\FitnessResource\Product\" + mProduct.PID;
+
+                        if (!Directory.Exists(rootFolder))
+                            Directory.CreateDirectory(rootFolder);
+
                         string[] files = Directory.GetFiles(rootFolder);
                         foreach (var file in files)
                         {
@@ -175,6 +249,11 @@ namespace FitnessWebApp.Controllers
                         File.WriteAllBytes(NameNewFile, fileBytes);
 
                         Imgcount++;
+
+
+                        mProduct.Img = Imgcount.ToString();
+
+                        BLL.Product.UpdateProductImgNumber(mProduct);
                     }
                     else
                     {
@@ -191,9 +270,14 @@ namespace FitnessWebApp.Controllers
             }
         }
 
-
+        [AcceptVerbs("Get")]
+        [AllowAnonymous]
+        public Com.Pay GetPayResult(int PayID)
+        {
+            return BLL.Payment.GetPayByID(PayID);
+        }
         [AcceptVerbs("Post")]
-
+        [AllowAnonymous]
         public IHttpActionResult CallBackPayResult(HttpRequestMessage request)
         {
             try
@@ -225,7 +309,9 @@ namespace FitnessWebApp.Controllers
                     //chio to Db updte konam Akhe !
 
                     new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, payEndResult.BuyID, 2, "Bad END"); }).Start();
-                    return Redirect("https://www.hasma.ir/payment/failed");
+                    // return Redirect("https://www.hasma.ir/payment/failed");
+                    return Redirect("wodex://purchase");
+
                 }
                 else
                 {
@@ -264,12 +350,14 @@ namespace FitnessWebApp.Controllers
                 }
 
                 new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, payEndResult.BuyID, 1, "Happy END"); }).Start();
-                return Redirect("https://www.hasma.ir/payment/Success/" + payEndResult.TrackingNumber);
+                //  return Redirect("https://www.hasma.ir/payment/Success/" + payEndResult.TrackingNumber);
+                return Redirect("wodex://purchase");
             }
             catch (Exception e)
             {
                 new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, "payEndResult", -100, e.Message); }).Start();
-                return Redirect("https://www.hasma.ir/payment/failed");
+                //return Redirect("https://www.hasma.ir/payment/failed");
+                return Redirect("wodex://purchase");
             }
         }
 

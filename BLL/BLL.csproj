@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB.cs" />
+    <Compile Include="Feedback.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />

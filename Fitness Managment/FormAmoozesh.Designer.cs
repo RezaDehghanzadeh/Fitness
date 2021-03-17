@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -66,8 +66,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox19 = new System.Windows.Forms.GroupBox();
-            this.textBoxPayeshZan = new System.Windows.Forms.TextBox();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.textBoxPayeshMard = new System.Windows.Forms.TextBox();
             this.button23 = new System.Windows.Forms.Button();
@@ -156,6 +154,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.textBoxPayeshZan = new System.Windows.Forms.TextBox();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.textBoxZaribSakhti = new System.Windows.Forms.TextBox();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -164,7 +168,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox19.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.groupBox15.SuspendLayout();
@@ -187,6 +190,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox19.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -242,7 +248,7 @@
             this.groupBox1.Font = new System.Drawing.Font("B Nazanin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.groupBox1.Location = new System.Drawing.Point(501, 95);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(703, 495);
+            this.groupBox1.Size = new System.Drawing.Size(703, 531);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "وارد کردن محتوا";
@@ -274,7 +280,7 @@
             this.button5.Location = new System.Drawing.Point(311, 48);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(113, 23);
-            this.button5.TabIndex = 20;
+            this.button5.TabIndex = 25;
             this.button5.Text = "Select Image Third";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -285,7 +291,7 @@
             this.button4.Location = new System.Drawing.Point(162, 48);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(113, 23);
-            this.button4.TabIndex = 19;
+            this.button4.TabIndex = 24;
             this.button4.Text = "Select Second Image";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -303,7 +309,7 @@
             this.button2.Location = new System.Drawing.Point(486, 107);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 60);
-            this.button2.TabIndex = 13;
+            this.button2.TabIndex = 26;
             this.button2.Text = "تایید و اضافه کردن واحد";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -351,7 +357,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(451, 34);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(233, 70);
-            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.TabIndex = 22;
             this.richTextBox1.Text = "";
             // 
             // label5
@@ -369,7 +375,7 @@
             this.button1.Location = new System.Drawing.Point(16, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 23);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 23;
             this.button1.Text = "Select First Image";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -399,13 +405,13 @@
             this.dataGridView1.RowHeadersWidth = 20;
             this.dataGridView1.RowTemplate.Height = 80;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.Size = new System.Drawing.Size(690, 301);
+            this.dataGridView1.Size = new System.Drawing.Size(690, 337);
             this.dataGridView1.TabIndex = 13;
             // 
             // TextVahed
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.TextVahed.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.TextVahed.DefaultCellStyle = dataGridViewCellStyle6;
             this.TextVahed.HeaderText = "TextVahed";
             this.TextVahed.Name = "TextVahed";
             // 
@@ -443,10 +449,10 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button3.Location = new System.Drawing.Point(367, 535);
+            this.button3.Location = new System.Drawing.Point(8, 596);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(130, 60);
-            this.button3.TabIndex = 15;
+            this.button3.Size = new System.Drawing.Size(484, 30);
+            this.button3.TabIndex = 27;
             this.button3.Text = "ارسال به سرور";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -482,7 +488,8 @@
             this.textBox1.Location = new System.Drawing.Point(667, 64);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(236, 24);
-            this.textBox1.TabIndex = 8;
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -519,7 +526,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(910, 43);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(268, 56);
-            this.richTextBox2.TabIndex = 18;
+            this.richTextBox2.TabIndex = 3;
             this.richTextBox2.Text = "";
             // 
             // label8
@@ -550,12 +557,14 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1216, 627);
+            this.tabControl1.Size = new System.Drawing.Size(1216, 659);
             this.tabControl1.TabIndex = 21;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gold;
+            this.tabPage1.Controls.Add(this.groupBox21);
+            this.tabPage1.Controls.Add(this.groupBox20);
             this.tabPage1.Controls.Add(this.groupBox19);
             this.tabPage1.Controls.Add(this.groupBox18);
             this.tabPage1.Controls.Add(this.button23);
@@ -590,33 +599,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1208, 597);
+            this.tabPage1.Size = new System.Drawing.Size(1208, 629);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "اضافه کردن";
-            // 
-            // groupBox19
-            // 
-            this.groupBox19.Controls.Add(this.textBoxPayeshZan);
-            this.groupBox19.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.groupBox19.Location = new System.Drawing.Point(296, 535);
-            this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(65, 60);
-            this.groupBox19.TabIndex = 37;
-            this.groupBox19.TabStop = false;
-            this.groupBox19.Text = "پایش زن";
-            // 
-            // textBoxPayeshZan
-            // 
-            this.textBoxPayeshZan.Location = new System.Drawing.Point(6, 26);
-            this.textBoxPayeshZan.Name = "textBoxPayeshZan";
-            this.textBoxPayeshZan.Size = new System.Drawing.Size(53, 27);
-            this.textBoxPayeshZan.TabIndex = 0;
             // 
             // groupBox18
             // 
             this.groupBox18.Controls.Add(this.textBoxPayeshMard);
             this.groupBox18.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.groupBox18.Location = new System.Drawing.Point(225, 535);
+            this.groupBox18.Location = new System.Drawing.Point(206, 534);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(65, 60);
             this.groupBox18.TabIndex = 36;
@@ -628,7 +619,7 @@
             this.textBoxPayeshMard.Location = new System.Drawing.Point(6, 26);
             this.textBoxPayeshMard.Name = "textBoxPayeshMard";
             this.textBoxPayeshMard.Size = new System.Drawing.Size(53, 27);
-            this.textBoxPayeshMard.TabIndex = 0;
+            this.textBoxPayeshMard.TabIndex = 18;
             // 
             // button23
             // 
@@ -654,7 +645,7 @@
             // 
             this.groupBox15.Controls.Add(this.textBoxTadil);
             this.groupBox15.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.groupBox15.Location = new System.Drawing.Point(73, 535);
+            this.groupBox15.Location = new System.Drawing.Point(66, 534);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(75, 60);
             this.groupBox15.TabIndex = 33;
@@ -666,13 +657,13 @@
             this.textBoxTadil.Location = new System.Drawing.Point(6, 27);
             this.textBoxTadil.Name = "textBoxTadil";
             this.textBoxTadil.Size = new System.Drawing.Size(63, 27);
-            this.textBoxTadil.TabIndex = 0;
+            this.textBoxTadil.TabIndex = 16;
             // 
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.textBoxTime);
             this.groupBox16.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.groupBox16.Location = new System.Drawing.Point(154, 535);
+            this.groupBox16.Location = new System.Drawing.Point(141, 534);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(65, 60);
             this.groupBox16.TabIndex = 32;
@@ -684,13 +675,13 @@
             this.textBoxTime.Location = new System.Drawing.Point(6, 26);
             this.textBoxTime.Name = "textBoxTime";
             this.textBoxTime.Size = new System.Drawing.Size(53, 27);
-            this.textBoxTime.TabIndex = 0;
+            this.textBoxTime.TabIndex = 17;
             // 
             // groupBox17
             // 
             this.groupBox17.Controls.Add(this.textBoxVazn);
             this.groupBox17.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.groupBox17.Location = new System.Drawing.Point(7, 535);
+            this.groupBox17.Location = new System.Drawing.Point(2, 534);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Size = new System.Drawing.Size(64, 60);
             this.groupBox17.TabIndex = 31;
@@ -702,7 +693,7 @@
             this.textBoxVazn.Location = new System.Drawing.Point(6, 27);
             this.textBoxVazn.Name = "textBoxVazn";
             this.textBoxVazn.Size = new System.Drawing.Size(52, 27);
-            this.textBoxVazn.TabIndex = 0;
+            this.textBoxVazn.TabIndex = 15;
             // 
             // groupBox10
             // 
@@ -712,7 +703,7 @@
             this.groupBox10.Font = new System.Drawing.Font("B Nazanin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.groupBox10.Location = new System.Drawing.Point(250, 442);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(247, 92);
+            this.groupBox10.Size = new System.Drawing.Size(247, 87);
             this.groupBox10.TabIndex = 30;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "تجهیزات";
@@ -769,7 +760,7 @@
             this.checkedListBox9.Location = new System.Drawing.Point(6, 14);
             this.checkedListBox9.Name = "checkedListBox9";
             this.checkedListBox9.Size = new System.Drawing.Size(114, 61);
-            this.checkedListBox9.TabIndex = 0;
+            this.checkedListBox9.TabIndex = 14;
             // 
             // groupBox9
             // 
@@ -779,7 +770,7 @@
             this.groupBox9.Font = new System.Drawing.Font("B Nazanin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.groupBox9.Location = new System.Drawing.Point(7, 442);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(242, 92);
+            this.groupBox9.Size = new System.Drawing.Size(242, 87);
             this.groupBox9.TabIndex = 25;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "مهارت ها";
@@ -835,8 +826,8 @@
             "Wall Walk"});
             this.checkedListBox8.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox8.Name = "checkedListBox8";
-            this.checkedListBox8.Size = new System.Drawing.Size(110, 70);
-            this.checkedListBox8.TabIndex = 0;
+            this.checkedListBox8.Size = new System.Drawing.Size(110, 61);
+            this.checkedListBox8.TabIndex = 13;
             // 
             // groupBox8
             // 
@@ -881,7 +872,7 @@
             this.checkedListBox7.Location = new System.Drawing.Point(6, 16);
             this.checkedListBox7.Name = "checkedListBox7";
             this.checkedListBox7.Size = new System.Drawing.Size(114, 70);
-            this.checkedListBox7.TabIndex = 0;
+            this.checkedListBox7.TabIndex = 12;
             // 
             // groupBox7
             // 
@@ -926,7 +917,7 @@
             this.checkedListBox6.Location = new System.Drawing.Point(6, 16);
             this.checkedListBox6.Name = "checkedListBox6";
             this.checkedListBox6.Size = new System.Drawing.Size(114, 70);
-            this.checkedListBox6.TabIndex = 0;
+            this.checkedListBox6.TabIndex = 11;
             // 
             // groupBox6
             // 
@@ -996,7 +987,7 @@
             this.checkedListBox5.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox5.Name = "checkedListBox5";
             this.checkedListBox5.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBox5.TabIndex = 0;
+            this.checkedListBox5.TabIndex = 10;
             // 
             // groupBox5
             // 
@@ -1066,7 +1057,7 @@
             this.checkedListBox4.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox4.Name = "checkedListBox4";
             this.checkedListBox4.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBox4.TabIndex = 0;
+            this.checkedListBox4.TabIndex = 9;
             // 
             // groupBox11
             // 
@@ -1118,7 +1109,7 @@
             this.checkedListBox3.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox3.Name = "checkedListBox3";
             this.checkedListBox3.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBox3.TabIndex = 0;
+            this.checkedListBox3.TabIndex = 8;
             // 
             // groupBox12
             // 
@@ -1170,7 +1161,7 @@
             this.checkedListBox2.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox2.Name = "checkedListBox2";
             this.checkedListBox2.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBox2.TabIndex = 0;
+            this.checkedListBox2.TabIndex = 7;
             // 
             // groupBox13
             // 
@@ -1251,7 +1242,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(6, 17);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBox1.TabIndex = 0;
+            this.checkedListBox1.TabIndex = 6;
             // 
             // groupBox14
             // 
@@ -1332,7 +1323,7 @@
             this.checkedListBoxUpperBody.Location = new System.Drawing.Point(4, 17);
             this.checkedListBoxUpperBody.Name = "checkedListBoxUpperBody";
             this.checkedListBoxUpperBody.Size = new System.Drawing.Size(114, 92);
-            this.checkedListBoxUpperBody.TabIndex = 0;
+            this.checkedListBoxUpperBody.TabIndex = 5;
             // 
             // tabPage2
             // 
@@ -1342,7 +1333,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1208, 597);
+            this.tabPage2.Size = new System.Drawing.Size(1208, 629);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "آپدیت کردن";
             this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
@@ -1737,12 +1728,66 @@
             this.label12.TabIndex = 12;
             this.label12.Text = "در حال دریافت اطلاعات از سرور... صبر کنید";
             // 
+            // textBoxPayeshZan
+            // 
+            this.textBoxPayeshZan.Location = new System.Drawing.Point(6, 26);
+            this.textBoxPayeshZan.Name = "textBoxPayeshZan";
+            this.textBoxPayeshZan.Size = new System.Drawing.Size(53, 27);
+            this.textBoxPayeshZan.TabIndex = 19;
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.textBoxPayeshZan);
+            this.groupBox19.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.groupBox19.Location = new System.Drawing.Point(271, 534);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(65, 60);
+            this.groupBox19.TabIndex = 37;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "پایش زن";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.textBoxZaribSakhti);
+            this.groupBox20.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.groupBox20.Location = new System.Drawing.Point(337, 534);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(82, 60);
+            this.groupBox20.TabIndex = 38;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "ضریب سختی";
+            // 
+            // textBoxZaribSakhti
+            // 
+            this.textBoxZaribSakhti.Location = new System.Drawing.Point(6, 26);
+            this.textBoxZaribSakhti.Name = "textBoxZaribSakhti";
+            this.textBoxZaribSakhti.Size = new System.Drawing.Size(70, 27);
+            this.textBoxZaribSakhti.TabIndex = 20;
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.textBox9);
+            this.groupBox21.Font = new System.Drawing.Font("B Nazanin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.groupBox21.Location = new System.Drawing.Point(419, 534);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(78, 60);
+            this.groupBox21.TabIndex = 39;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "درصد تعادل";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(6, 26);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(67, 27);
+            this.textBox9.TabIndex = 21;
+            // 
             // FormAmoozesh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
-            this.ClientSize = new System.Drawing.Size(1221, 630);
+            this.ClientSize = new System.Drawing.Size(1221, 661);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormAmoozesh";
@@ -1758,8 +1803,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox19.ResumeLayout(false);
-            this.groupBox19.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
@@ -1789,6 +1832,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1918,9 +1967,13 @@
         private System.Windows.Forms.TextBox textBoxVazn;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.GroupBox groupBox19;
-        private System.Windows.Forms.TextBox textBoxPayeshZan;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.TextBox textBoxPayeshMard;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.TextBox textBoxZaribSakhti;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.TextBox textBoxPayeshZan;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }

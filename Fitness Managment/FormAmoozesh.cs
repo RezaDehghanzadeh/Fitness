@@ -612,8 +612,10 @@ namespace Fitness_Managment
         {
             if (publicText1 == "" && publicText2 == "" && publicText3 == "")
             {
-                MessageBox.Show("عکسی انتخاب نکردید");
-                return;
+                MessageBox.Show("عکسی انتخاب نکردید ولی ادامه میدیم");
+                //                return;
+
+                dataGridView1.Rows.Add(richTextBox1.Text, null, null, null, textBox2.Text, textBox3.Text, textBox4.Text);
             }
             else if (publicText2 == "" && publicText3 == "")
             {
@@ -679,32 +681,33 @@ namespace Fitness_Managment
 
 
                         StringContent contentBody = new StringContent(JsonConvert.SerializeObject(movementTrainingDetail));
-                        form.Add(contentBody, "Object");
-
-                        var fs = File.OpenRead(filePath1);
-                        var streamContent = new StreamContent(fs);
-                        var fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
-                        fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-                        form.Add(fileContent, "File", Path.GetExtension(filePath1));
-
-                        if (filePath2 != null && filePath2 != "")
+                        if (filePath1 != null && filePath1 != "")
                         {
-                            var fs2 = File.OpenRead(filePath2);
-                            var streamContent2 = new StreamContent(fs2);
-                            var fileContent2 = new ByteArrayContent(await streamContent2.ReadAsByteArrayAsync());
-                            fileContent2.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-                            form.Add(fileContent2, "File", Path.GetExtension(filePath2));
+                            form.Add(contentBody, "Object");
+                            var fs = File.OpenRead(filePath1);
+                            var streamContent = new StreamContent(fs);
+                            var fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
+                            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                            form.Add(fileContent, "File", Path.GetExtension(filePath1));
 
-                            if (filePath3 != null && filePath3 != "")
+                            if (filePath2 != null && filePath2 != "")
                             {
-                                var fs3 = File.OpenRead(filePath3);
-                                var streamContent3 = new StreamContent(fs3);
-                                var fileContent3 = new ByteArrayContent(await streamContent3.ReadAsByteArrayAsync());
-                                fileContent3.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-                                form.Add(fileContent3, "File", Path.GetExtension(filePath3));
+                                var fs2 = File.OpenRead(filePath2);
+                                var streamContent2 = new StreamContent(fs2);
+                                var fileContent2 = new ByteArrayContent(await streamContent2.ReadAsByteArrayAsync());
+                                fileContent2.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                                form.Add(fileContent2, "File", Path.GetExtension(filePath2));
+
+                                if (filePath3 != null && filePath3 != "")
+                                {
+                                    var fs3 = File.OpenRead(filePath3);
+                                    var streamContent3 = new StreamContent(fs3);
+                                    var fileContent3 = new ByteArrayContent(await streamContent3.ReadAsByteArrayAsync());
+                                    fileContent3.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                                    form.Add(fileContent3, "File", Path.GetExtension(filePath3));
+                                }
                             }
                         }
-
                         HttpResponseMessage response = await httpClient.PostAsync(BaseAddress + "fitness/VOD/PostMovementDetail", form);
                         string ResStr = await response.Content.ReadAsStringAsync();
                         Console.WriteLine("PostMovementDetail : " + ResStr);
@@ -897,21 +900,22 @@ namespace Fitness_Managment
                 {
                     movFilter = new Com.MovFilter()
                     {
-                        Envoritment =                listBoxEnvoritment     .Items.Cast<String>().ToList(),
-                        Equipment =                  listBoxEquipment       .Items.Cast<String>().ToList(),
-                        MDbody =                     listBoxMDBody      .Items.Cast<String>().ToList(),
-                        MMbody =                     listBoxMMBody          .Items.Cast<String>().ToList(),
-                        Modality =                   listBoxModality        .Items.Cast<String>().ToList(),
-                        MUbody =                     listBoxMUBody          .Items.Cast<String>().ToList(),
-                        SDbody =                     listBoxSDBody      .Items.Cast<String>().ToList(),
-                        Skill =                      listBoxSkill       .Items.Cast<String>().ToList(),
-                        SMbody =                     listBoxSMBody      .Items.Cast<String>().ToList(),
-                        SUbody =                     listBoxSUBody      .Items.Cast<String>().ToList(),
-                        Time = Int32.Parse(          textBoxTime        .Text),
-                        Vazn = Int32.Parse(          textBoxVazn        .Text),
-                        Zarib = Int32.Parse(         textBoxTadil       .Text),
-                        PayeshMard = Int32.Parse(    textBoxPayeshMard      .Text),
-                        PayeshZan = Int32.Parse(     textBoxPayeshZan       .Text)
+                        Envoritment = listBoxEnvoritment.Items.Cast<String>().ToList(),
+                        Equipment = listBoxEquipment.Items.Cast<String>().ToList(),
+                        MDbody = listBoxMDBody.Items.Cast<String>().ToList(),
+                        MMbody = listBoxMMBody.Items.Cast<String>().ToList(),
+                        Modality = listBoxModality.Items.Cast<String>().ToList(),
+                        MUbody = listBoxMUBody.Items.Cast<String>().ToList(),
+                        SDbody = listBoxSDBody.Items.Cast<String>().ToList(),
+                        Skill = listBoxSkill.Items.Cast<String>().ToList(),
+                        SMbody = listBoxSMBody.Items.Cast<String>().ToList(),
+                        SUbody = listBoxSUBody.Items.Cast<String>().ToList(),
+                        Time = float.Parse(textBoxTime.Text),
+                        Vazn = float.Parse(textBoxVazn.Text),
+                        Zarib = float.Parse(textBoxTadil.Text),
+                        PayeshMard = float.Parse(textBoxPayeshMard.Text),
+                        PayeshZan = float.Parse(textBoxPayeshZan.Text),
+                        ZaribSakhti = float.Parse(textBoxZaribSakhti.Text)
                     };
                 }
                 catch (Exception)
@@ -993,7 +997,7 @@ namespace Fitness_Managment
                 textBoxPayeshMard.Text = "";
                 textBoxPayeshZan.Text = "";
                 pictureBox7.Image = null;
-                
+
             }
             catch (Exception ee)
             {

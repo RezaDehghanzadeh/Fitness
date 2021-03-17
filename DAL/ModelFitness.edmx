@@ -20,6 +20,16 @@
           <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="PID" Type="int" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Content">
           <Key>
             <PropertyRef Name="CID" />
@@ -36,12 +46,9 @@
             <PropertyRef Name="DVID" />
           </Key>
           <Property Name="DVID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="TypeVODID" Type="int" />
-          <Property Name="TypeVODStr" Type="nvarchar" MaxLength="8" Nullable="false" />
-          <Property Name="Duration" Type="float" Nullable="false" />
-          <Property Name="ItemVOD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VID" Type="int" Nullable="false" />
+          <Property Name="VODName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -141,7 +148,7 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           </Key>
           <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CatID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="specifications" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
@@ -174,6 +181,14 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="SequenceNum" Type="int" Nullable="false" />
           <Property Name="IsBanner" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ScienceRanking" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UID" />
@@ -198,14 +213,10 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="FamilyName" Type="nvarchar" MaxLength="100" />
           <Property Name="NickName" Type="nvarchar" MaxLength="50" />
           <Property Name="CodeMeli" Type="nvarchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="UserBasket">
-          <Key>
-            <PropertyRef Name="UCID" />
-          </Key>
-          <Property Name="UCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UID" Type="int" Nullable="false" />
-          <Property Name="PID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="CodePosti" Type="nvarchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ostan" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserBought">
           <Key>
@@ -222,22 +233,10 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
             <PropertyRef Name="UMID" />
           </Key>
           <Property Name="UMID" Type="int" Nullable="false" />
-          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
           <Property Name="Seen" Type="bit" Nullable="false" />
-          <Property Name="UID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserShipping">
-          <Key>
-            <PropertyRef Name="USHID" />
-          </Key>
-          <Property Name="USHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UID" Type="int" Nullable="false" />
-          <Property Name="ProductsID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SendingTime" Type="datetime" />
-          <Property Name="Cost" Type="float" Nullable="false" />
-          <Property Name="IsPaid" Type="bit" Nullable="false" />
-          <Property Name="DiscountCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserVOD">
           <Key>
@@ -252,9 +251,24 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="Duration" Type="float" Nullable="false" />
           <Property Name="ItemVOD" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="VOD">
+          <Key>
+            <PropertyRef Name="VID" />
+          </Key>
+          <Property Name="VID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Moment" Type="datetime" Nullable="false" />
+          <Property Name="DesignerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DesignerUID" Type="int" Nullable="false" />
+          <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Round" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Movment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsPreMade" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="FitnessModelStoreContainer">
           <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyVOD" EntityType="Self.DailyVOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
@@ -267,12 +281,12 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseZarinpalLog" EntityType="Self.PurchaseZarinpalLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserBasket" EntityType="Self.UserBasket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserBought" EntityType="Self.UserBought" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserShipping" EntityType="Self.UserShipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserVOD" EntityType="Self.UserVOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOD" EntityType="Self.VOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiscountCode" EntityType="Self.DiscountCode" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DiscountCode].[Code] AS [Code], 
@@ -288,8 +302,8 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
         <EntityContainer Name="FitnessEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articles" EntityType="FitnessModel.Article" />
           <EntitySet Name="Categories" EntityType="FitnessModel.Category" />
+          <EntitySet Name="Comments" EntityType="FitnessModel.Comment" />
           <EntitySet Name="Contents" EntityType="FitnessModel.Content" />
-          <EntitySet Name="DailyVODs" EntityType="FitnessModel.DailyVOD" />
           <EntitySet Name="Features" EntityType="FitnessModel.Feature" />
           <EntitySet Name="Logs" EntityType="FitnessModel.Log" />
           <EntitySet Name="MovementTrainings" EntityType="FitnessModel.MovementTraining" />
@@ -300,13 +314,14 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <EntitySet Name="Products" EntityType="FitnessModel.Product" />
           <EntitySet Name="PurchaseZarinpalLogs" EntityType="FitnessModel.PurchaseZarinpalLog" />
           <EntitySet Name="Shops" EntityType="FitnessModel.Shop" />
+          <EntitySet Name="Teachers" EntityType="FitnessModel.Teacher" />
           <EntitySet Name="Users" EntityType="FitnessModel.User" />
-          <EntitySet Name="UserBaskets" EntityType="FitnessModel.UserBasket" />
           <EntitySet Name="UserBoughts" EntityType="FitnessModel.UserBought" />
           <EntitySet Name="UserMessages" EntityType="FitnessModel.UserMessage" />
-          <EntitySet Name="UserShippings" EntityType="FitnessModel.UserShipping" />
           <EntitySet Name="UserVODs" EntityType="FitnessModel.UserVOD" />
           <EntitySet Name="DiscountCodes" EntityType="FitnessModel.DiscountCode" />
+          <EntitySet Name="DailyVODs" EntityType="FitnessModel.DailyVOD" />
+          <EntitySet Name="VODs" EntityType="FitnessModel.VOD" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
@@ -323,6 +338,16 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Content">
           <Key>
             <PropertyRef Name="CID" />
@@ -333,18 +358,6 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DailyVOD">
-          <Key>
-            <PropertyRef Name="DVID" />
-          </Key>
-          <Property Name="DVID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TypeVODID" Type="Int32" />
-          <Property Name="TypeVODStr" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="Duration" Type="Double" Nullable="false" />
-          <Property Name="ItemVOD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -433,7 +446,7 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           </Key>
           <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CatID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="specifications" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" Nullable="false" />
@@ -466,6 +479,14 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="SequenceNum" Type="Int32" Nullable="false" />
           <Property Name="IsBanner" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ScienceRanking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UID" />
@@ -490,14 +511,10 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="FamilyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CodeMeli" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="UserBasket">
-          <Key>
-            <PropertyRef Name="UCID" />
-          </Key>
-          <Property Name="UCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UID" Type="Int32" Nullable="false" />
-          <Property Name="PID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodePosti" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ostan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserBought">
           <Key>
@@ -514,22 +531,10 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
             <PropertyRef Name="UMID" />
           </Key>
           <Property Name="UMID" Type="Int32" Nullable="false" />
-          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
           <Property Name="Seen" Type="Boolean" Nullable="false" />
-          <Property Name="UID" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserShipping">
-          <Key>
-            <PropertyRef Name="USHID" />
-          </Key>
-          <Property Name="USHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UID" Type="Int32" Nullable="false" />
-          <Property Name="ProductsID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SendingTime" Type="DateTime" Precision="3" />
-          <Property Name="Cost" Type="Double" Nullable="false" />
-          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
-          <Property Name="DiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserVOD">
           <Key>
@@ -552,6 +557,29 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="percentage" Type="Int32" Nullable="false" />
           <Property Name="PackageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DailyVOD">
+          <Key>
+            <PropertyRef Name="DVID" />
+          </Key>
+          <Property Name="DVID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VID" Type="Int32" Nullable="false" />
+          <Property Name="VODName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VOD">
+          <Key>
+            <PropertyRef Name="VID" />
+          </Key>
+          <Property Name="VID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Moment" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DesignerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DesignerUID" Type="Int32" Nullable="false" />
+          <Property Name="Info" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Round" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Movment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPreMade" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -576,6 +604,17 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="FitnessModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Contents">
             <EntityTypeMapping TypeName="FitnessModel.Content">
               <MappingFragment StoreEntitySet="Content">
@@ -585,19 +624,6 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CID" ColumnName="CID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DailyVODs">
-            <EntityTypeMapping TypeName="FitnessModel.DailyVOD">
-              <MappingFragment StoreEntitySet="DailyVOD">
-                <ScalarProperty Name="ItemVOD" ColumnName="ItemVOD" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="TypeVODStr" ColumnName="TypeVODStr" />
-                <ScalarProperty Name="TypeVODID" ColumnName="TypeVODID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="VID" ColumnName="VID" />
-                <ScalarProperty Name="DVID" ColumnName="DVID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -731,9 +757,22 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="FitnessModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="ScienceRanking" ColumnName="ScienceRanking" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="FitnessModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Ostan" ColumnName="Ostan" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CodePosti" ColumnName="CodePosti" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CodeMeli" ColumnName="CodeMeli" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
@@ -757,15 +796,6 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserBaskets">
-            <EntityTypeMapping TypeName="FitnessModel.UserBasket">
-              <MappingFragment StoreEntitySet="UserBasket">
-                <ScalarProperty Name="PID" ColumnName="PID" />
-                <ScalarProperty Name="UID" ColumnName="UID" />
-                <ScalarProperty Name="UCID" ColumnName="UCID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserBoughts">
             <EntityTypeMapping TypeName="FitnessModel.UserBought">
               <MappingFragment StoreEntitySet="UserBought">
@@ -780,24 +810,11 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
           <EntitySetMapping Name="UserMessages">
             <EntityTypeMapping TypeName="FitnessModel.UserMessage">
               <MappingFragment StoreEntitySet="UserMessage">
-                <ScalarProperty Name="UID" ColumnName="UID" />
-                <ScalarProperty Name="Seen" ColumnName="Seen" />
                 <ScalarProperty Name="Context" ColumnName="Context" />
-                <ScalarProperty Name="UMID" ColumnName="UMID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserShippings">
-            <EntityTypeMapping TypeName="FitnessModel.UserShipping">
-              <MappingFragment StoreEntitySet="UserShipping">
-                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
-                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="SendingTime" ColumnName="SendingTime" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
                 <ScalarProperty Name="UID" ColumnName="UID" />
-                <ScalarProperty Name="USHID" ColumnName="USHID" />
+                <ScalarProperty Name="UMID" ColumnName="UMID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -821,6 +838,31 @@ warning 6002: The table/view 'Fitness.dbo.DiscountCode' does not have a primary 
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="percentage" ColumnName="percentage" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyVODs">
+            <EntityTypeMapping TypeName="FitnessModel.DailyVOD">
+              <MappingFragment StoreEntitySet="DailyVOD">
+                <ScalarProperty Name="VODName" ColumnName="VODName" />
+                <ScalarProperty Name="VID" ColumnName="VID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DVID" ColumnName="DVID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VODs">
+            <EntityTypeMapping TypeName="FitnessModel.VOD">
+              <MappingFragment StoreEntitySet="VOD">
+                <ScalarProperty Name="IsPreMade" ColumnName="IsPreMade" />
+                <ScalarProperty Name="Movment" ColumnName="Movment" />
+                <ScalarProperty Name="Round" ColumnName="Round" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="DesignerUID" ColumnName="DesignerUID" />
+                <ScalarProperty Name="DesignerName" ColumnName="DesignerName" />
+                <ScalarProperty Name="Moment" ColumnName="Moment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VID" ColumnName="VID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -15,11 +15,8 @@ namespace Com
     public partial class DailyVOD
     {
         public int DVID { get; set; }
-        public int VID { get; set; }
         public System.DateTime Date { get; set; }
-        public Nullable<int> TypeVODID { get; set; }
-        public string TypeVODStr { get; set; }
-        public double Duration { get; set; }
-        public string ItemVOD { get; set; }
+        public int VID { get; set; }
+        public string VODName { get; set; }
     }
 }

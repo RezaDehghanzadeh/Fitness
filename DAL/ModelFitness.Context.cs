@@ -29,8 +29,8 @@ namespace DAL
     
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
-        public virtual DbSet<DailyVOD> DailyVODs { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<MovementTraining> MovementTrainings { get; set; }
@@ -41,12 +41,13 @@ namespace DAL
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PurchaseZarinpalLog> PurchaseZarinpalLogs { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserBasket> UserBaskets { get; set; }
         public virtual DbSet<UserBought> UserBoughts { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
-        public virtual DbSet<UserShipping> UserShippings { get; set; }
         public virtual DbSet<UserVOD> UserVODs { get; set; }
         public virtual DbSet<DiscountCode> DiscountCodes { get; set; }
+        public virtual DbSet<DailyVOD> DailyVODs { get; set; }
+        public virtual DbSet<VOD> VODs { get; set; }
     }
 }

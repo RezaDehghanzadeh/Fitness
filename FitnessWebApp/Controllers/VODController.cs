@@ -17,6 +17,14 @@ namespace FitnessWebApp.Controllers
     [Authorize]
     public class VODController : ApiController
     {
+        [AllowAnonymous]
+        [AcceptVerbs("Get")]
+        public bool DeleteVOD(int VID)
+        {
+            return BLL.VOD.DeleteVOD(VID);
+        }
+
+
 
         [AllowAnonymous]
         [AcceptVerbs("Get")]
@@ -54,6 +62,13 @@ namespace FitnessWebApp.Controllers
         public List<Com.MovementTraining> GetAllMovementTraining()
         {
             return BLL.VOD.GetAllMovementTraining();
+        }
+
+        [AllowAnonymous]
+        [AcceptVerbs("Get")]
+        public List<Com.MiniVOD> GetPreMadeVOD()
+        {
+            return BLL.VOD.GetAllPreMadeVOD();
         }
 
         [AllowAnonymous]
@@ -227,6 +242,79 @@ namespace FitnessWebApp.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [AcceptVerbs("Post")]
+        public async Task<int> PostVOD()
+        {
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostVOD, "", -101, "MimeMultipartContent"); }).Start();
+                    return -101;
+                }
+
+                int NewVID = 0;
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                Com.VOD mVOD = new Com.VOD();
+
+                foreach (var itemContent in filesReadToProvider.Contents)
+                {
+                    if (itemContent.Headers.ContentDisposition.Name == "Object")
+                    {
+
+                        var jsonString = await itemContent.ReadAsStringAsync();
+                        var serializer = new JavaScriptSerializer();
+                        mVOD = serializer.Deserialize<Com.VOD>(jsonString);
+
+                        var tmpVOD = BLL.VOD.GetVODByName(mVOD.Name);
+                        if (tmpVOD != null)
+                        {
+                            new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostVOD, "", -103, "Name is repeated"); }).Start();
+                            return -103;
+                        }
+
+                        int ResAdd = BLL.VOD.AddVOD(mVOD);
+                        if (ResAdd < 0)
+                        {
+                            new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostVOD, "", -102, "cant Add to DB"); }).Start();
+                            return -102;
+                        }
+                        else
+                        {
+                            NewVID = ResAdd;
+                        }
+                    }
+                    else if (itemContent.Headers.ContentDisposition.Name == "File")
+                    {
+                        var fileBytes = await itemContent.ReadAsByteArrayAsync();
+                        string HeaderType = itemContent.Headers.ContentDisposition.FileName;
+
+                        string NameNewFile = System.Web.Hosting.HostingEnvironment.MapPath("~/FitnessResource/VOD/" + NewVID);
+
+                        if (!Directory.Exists(NameNewFile))
+                            Directory.CreateDirectory(NameNewFile);
+
+                        NameNewFile = NameNewFile + "/Img" + HeaderType;
+
+                        File.WriteAllBytes(NameNewFile, fileBytes);
+
+                        return NewVID;
+                    }
+                    else
+                    {
+                        new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostVOD, "", -106, "Ye Chize ezafi too req boode"); }).Start();
+                        return -106;
+                    }
+                }
+                return -104;
+            }
+            catch (Exception ee)
+            {
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostVOD, "", -400, ee.Message); }).Start();
+                return -105;
+            }
+        }
 
         [AllowAnonymous]
         [AcceptVerbs("Post")]

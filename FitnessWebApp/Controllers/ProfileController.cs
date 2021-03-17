@@ -2,10 +2,13 @@
 using FitnessWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace FitnessWebApp.Controllers
 {
@@ -14,6 +17,7 @@ namespace FitnessWebApp.Controllers
     {
 
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public ResLastUserInfo GetLastUserInfo(int UID)
         {
             ResLastUserInfo Res = new ResLastUserInfo();
@@ -33,6 +37,11 @@ namespace FitnessWebApp.Controllers
                     RewardState = 1,
                     TellNumber = usr.TellNumber,
                     UID = usr.UID,
+                    Address = usr.Address ?? "",
+                    CodePosti = usr.CodePosti ?? "",
+                    City = usr.City ?? "",
+                    Ostan = usr.Ostan ?? "",
+
                 };
                 Res.MiniUser = miniUser;
                 Res.userBought = BLL.User.GetAllUserBought(UID);
@@ -40,19 +49,27 @@ namespace FitnessWebApp.Controllers
             }
             catch (Exception e)
             {
-
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Common.Action.GetLastUserInfo, UID.ToString(), -400, e.Message); }).Start();
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Common.Action.GetLastUserInfo, UID.ToString(), -400, e.InnerException.Message); }).Start();
             }
 
             return Res;
         }
 
         [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public List<Com.UserBought> GetAllUserBought(int UID)
         {
             return BLL.User.GetAllUserBought(UID);
         }
-
-            [AcceptVerbs("Get")]
+        [AcceptVerbs("Get")]
+        [AllowAnonymous]
+        public List<Com.Teacher> GetAllTeacher()
+        {
+            return BLL.User.GetAllTeacher();
+        }
+        [AcceptVerbs("Get")]
+        [AllowAnonymous]
         public Com.LogonResult Logon(string TellNumber)
         {
             try
@@ -103,6 +120,7 @@ namespace FitnessWebApp.Controllers
         }
 
         [AcceptVerbs("Post")]
+        [AllowAnonymous]
         public LoginResult Login([FromBody] LoginInput loginInput)
         {
             try
@@ -172,7 +190,7 @@ namespace FitnessWebApp.Controllers
                     mUser.DeviceID = loginInput.DeviceID;
                     mUser.FBToken = loginInput.FBToken;
 
-                    if (BLL.User.UpdateUser(mUser))
+                    if (BLL.User.UpdateUserAfterLogin(mUser))
                     {
                         return new LoginResult() { HasError = false, StatusResult = true, Token = "FelanAlaki" };
                     }
@@ -195,20 +213,95 @@ namespace FitnessWebApp.Controllers
             }
         }
 
-
-        // GET: api/Profile
+        [AcceptVerbs("Post")]
         [AllowAnonymous]
-        public IEnumerable<string> Get()
+        public bool UpdateUserProfile([FromBody] UserInfo UserInfo)
         {
-            
-            return new string[] { "value1", "value2" };
+            Com.User mUser = new User()
+            {
+                UID = UserInfo.UID,
+                Address = UserInfo.Address,
+                CodeMeli = UserInfo.CodeMeli,
+                CodePosti = UserInfo.CodePosti,
+                Email = UserInfo.Email,
+                FamilyName = UserInfo.FamilyName,
+                Name = UserInfo.Name,
+                NickName = UserInfo.NickName,
+                Ostan = UserInfo.Ostan,
+                City = UserInfo.City,
+
+            };
+            return BLL.User.UpdateUserInfo(mUser);
         }
 
-        // GET: api/Profile/5
-        public string Get(int id)
+
+        [AllowAnonymous]
+        [AcceptVerbs("Post")]
+        public async Task<IHttpActionResult> PostUpdateTeacher()
         {
-            return "value";
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                Com.Teacher mTeacher = new Com.Teacher();
+
+                int MainTID = 0;
+
+                foreach (var itemContent in filesReadToProvider.Contents)
+                {
+                    if (itemContent.Headers.ContentDisposition.Name == "Object")
+                    {
+                        var jsonString = await itemContent.ReadAsStringAsync();
+                        var serializer = new JavaScriptSerializer();
+                        mTeacher = serializer.Deserialize<Com.Teacher>(jsonString);
+
+                        if (mTeacher.TID != 0)
+                        {
+                            var ResAdd = BLL.User.GetTeacherByID(mTeacher.TID);
+                            if (ResAdd == null)
+                            {
+                                return BadRequest();
+                            }
+
+                            BLL.User.UpdateTeacher(mTeacher);
+                        }
+                        else
+                        {
+                            mTeacher.TID = BLL.User.AddTeacher(mTeacher);
+                        }
+                    }
+                    else if (itemContent.Headers.ContentDisposition.Name == "File")
+                    {
+                        var fileBytes = await itemContent.ReadAsByteArrayAsync();
+                        string HeaderType = itemContent.Headers.ContentDisposition.FileName;
+
+                        string NameNewFile = System.Web.Hosting.HostingEnvironment.MapPath("~/FitnessResource/Teacher/" + MainTID + "/");
+
+                        if (!Directory.Exists(NameNewFile))
+                            Directory.CreateDirectory(NameNewFile);
+
+                        NameNewFile = NameNewFile + "Img.jpg";
+
+                        File.WriteAllBytes(NameNewFile, fileBytes);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                return Ok();
+            }
+            catch (Exception ee)
+            {
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.PostUpdateTeacher, "", -400, ee.Message); }).Start();
+                return BadRequest();
+            }
         }
+
 
         // POST: api/Profile
         public void Post([FromBody] string value)

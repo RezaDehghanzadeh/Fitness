@@ -12,12 +12,12 @@ namespace Com
     using System;
     using System.Collections.Generic;
     
-    public partial class UserMessage
+    public partial class Comment
     {
-        public int UMID { get; set; }
+        public int ComID { get; set; }
         public int UID { get; set; }
-        public bool Seen { get; set; }
-        public string Titel { get; set; }
+        public int PID { get; set; }
         public string Context { get; set; }
+        public int Rate { get; set; }
     }
 }

@@ -26,21 +26,25 @@ namespace BLL
                 return -100;
             }
         }
-        public static int AddVOD(Com.DailyVOD mDailyVOD)
+
+
+
+        public static int AddVOD(Com.VOD mVOD)
         {
             try
             {
                 using (var ent = DB.Entity)
                 {
-                    ent.DailyVODs.Add(mDailyVOD);
+                    ent.VODs.Add(mVOD);
                     ent.SaveChanges();
 
-                    return mDailyVOD.DVID;
+                    return mVOD.VID;
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddDailyVOD, "", -100, e.Message);
+                Log.DoLog(Com.Common.Action.AddVOD, "", -100, e.Message);
+                Log.DoLog(Com.Common.Action.AddVOD, "", -100, e.InnerException.Message);
                 return -100;
             }
         }
@@ -81,7 +85,7 @@ namespace BLL
                 return -100;
             }
         }
-        public static Com.MovementTraining GetMovementTraining(string Part , string SubPart, string MoveName)
+        public static Com.MovementTraining GetMovementTraining(string Part, string SubPart, string MoveName)
         {
             try
             {
@@ -111,6 +115,71 @@ namespace BLL
                 return null;
             }
         }
+        public static Com.VOD GetVOD(int VID)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.VODs.Where(M => M.VID == VID).SingleOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetVOD, " ", -100, e.Message);
+                return null;
+            }
+        }
+        public static List<Com.MiniVOD> GetAllPreMadeVOD()
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.VODs.Where(M => M.IsPreMade == true).Select( M =>new Com.MiniVOD() { 
+                        Info = M.Info,
+                        Name = M.Name,
+                        VID = M.VID,
+                    }).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetAllPreMadeVOD, " ", -100, e.Message);
+                return null;
+            }
+        }
+        public static Com.VOD GetVODByName(string VODName)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.VODs.Where(M => M.Name == VODName).SingleOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetVODByName, " ", -100, e.Message);
+                return null;
+            }
+        }
+
+        public static List<Com.DailyVOD> GetDailyVODs(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.DailyVODs.Where(M => M.Date < endDate && M.Date > startDate).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.GetDailyVODs, " ", -100, e.Message);
+                return null;
+            }
+        }
         public static List<Com.MovementTraining> GetAllMovementTraining()
         {
             try
@@ -127,7 +196,7 @@ namespace BLL
             }
         }
 
-        public static List<Com.MovementTrainingDetail> GetAllMovementTrainingDetailByID (int MTID)
+        public static List<Com.MovementTrainingDetail> GetAllMovementTrainingDetailByID(int MTID)
         {
             try
             {
@@ -160,6 +229,47 @@ namespace BLL
             catch (Exception e)
             {
                 Log.DoLog(Com.Common.Action.UpdateMovementTraining, mMovementTraining.MTID.ToString(), -100, e.Message);
+                return false;
+            }
+        }
+        public static bool UpdateVOD(Com.VOD mVOD)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.VODs.Attach(mVOD);
+                    var Entry = ent.Entry(mVOD);
+                    Entry.Property(ex => ex.Round).IsModified = true;
+                    Entry.Property(ex => ex.Info).IsModified = true;
+                    ent.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.UpdateVOD, mVOD.VID.ToString(), -100, e.Message);
+                return false;
+            }
+        }
+
+        public static bool DeleteVOD(int VID)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    Com.VOD mVOD = new Com.VOD () { VID = VID };
+                    ent.VODs.Attach(mVOD);
+                    ent.VODs.Remove(mVOD);
+                    ent.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.DoLog(Com.Common.Action.DeleteVOD, VID.ToString(), -100, e.Message);
                 return false;
             }
         }

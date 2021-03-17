@@ -34,5 +34,9 @@ namespace Com
         public string FamilyName { get; set; }
         public string NickName { get; set; }
         public string CodeMeli { get; set; }
+        public string Address { get; set; }
+        public string CodePosti { get; set; }
+        public string City { get; set; }
+        public string Ostan { get; set; }
     }
 }

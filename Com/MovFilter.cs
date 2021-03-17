@@ -18,11 +18,12 @@ namespace Com
         public List<string> Envoritment { get; set; }
         public List<string> Skill { get; set; }
         public List<string> Equipment { get; set; }
-        public int Vazn { get; set; }
-        public int Zarib { get; set; }
-        public int Time { get; set; }
-        public int PayeshMard { get; set; }
-        public int PayeshZan { get; set; }
+        public float Vazn { get; set; }
+        public float Zarib { get; set; }
+        public float Time { get; set; }
+        public float PayeshMard { get; set; }
+        public float PayeshZan { get; set; }
+        public float ZaribSakhti { get; set; }
 
     }
 }

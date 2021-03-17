@@ -60,6 +60,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>ModelFitness.tt</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="Content.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
@@ -107,10 +110,10 @@
     <Compile Include="Shop.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Teacher.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserBasket.cs">
+    <Compile Include="User.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
     <Compile Include="UserBought.cs">
@@ -119,10 +122,10 @@
     <Compile Include="UserMessage.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserShipping.cs">
+    <Compile Include="UserVOD.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserVOD.cs">
+    <Compile Include="VOD.cs">
       <DependentUpon>ModelFitness.tt</DependentUpon>
     </Compile>
   </ItemGroup>

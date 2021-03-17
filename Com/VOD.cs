@@ -12,10 +12,16 @@ namespace Com
     using System;
     using System.Collections.Generic;
     
-    public partial class UserBasket
+    public partial class VOD
     {
-        public int UCID { get; set; }
-        public int UID { get; set; }
-        public int PID { get; set; }
+        public int VID { get; set; }
+        public string Name { get; set; }
+        public System.DateTime Moment { get; set; }
+        public string DesignerName { get; set; }
+        public int DesignerUID { get; set; }
+        public string Info { get; set; }
+        public string Round { get; set; }
+        public string Movment { get; set; }
+        public bool IsPreMade { get; set; }
     }
 }
