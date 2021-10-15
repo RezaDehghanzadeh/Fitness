@@ -31,8 +31,11 @@ namespace DAL
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<DailyVOD> DailyVODs { get; set; }
+        public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<ModifyType> ModifyTypes { get; set; }
         public virtual DbSet<MovementTraining> MovementTrainings { get; set; }
         public virtual DbSet<MovementTrainingDetail> MovementTrainingDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -41,13 +44,16 @@ namespace DAL
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PurchaseZarinpalLog> PurchaseZarinpalLogs { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserBought> UserBoughts { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
-        public virtual DbSet<UserVOD> UserVODs { get; set; }
+        public virtual DbSet<VODEquipment> VODEquipments { get; set; }
+        public virtual DbSet<VODMovment> VODMovments { get; set; }
         public virtual DbSet<DiscountCode> DiscountCodes { get; set; }
-        public virtual DbSet<DailyVOD> DailyVODs { get; set; }
+        public virtual DbSet<VODModifyType> VODModifyTypes { get; set; }
+        public virtual DbSet<UserVOD> UserVODs { get; set; }
         public virtual DbSet<VOD> VODs { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace Com
     
     public partial class MovementTraining
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MovementTraining()
+        {
+            this.VODMovments = new HashSet<VODMovment>();
+        }
+    
         public int MTID { get; set; }
         public string Context { get; set; }
         public string VideoAddress { get; set; }
@@ -21,5 +27,8 @@ namespace Com
         public string SubPart { get; set; }
         public string Movement { get; set; }
         public string Filter { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VODMovment> VODMovments { get; set; }
     }
 }

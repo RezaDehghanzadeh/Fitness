@@ -16,6 +16,7 @@ namespace FitnessWebApp.Controllers
     public class ProfileController : ApiController
     {
 
+
         [AcceptVerbs("Get")]
         [AllowAnonymous]
         public ResLastUserInfo GetLastUserInfo(int UID)
@@ -24,6 +25,9 @@ namespace FitnessWebApp.Controllers
             try
             {
                 Com.User usr = BLL.User.GetUser(UID);
+                int SSex = 0;
+                if (usr.Sex == true)
+                    SSex = 1;
                 MiniUser miniUser = new MiniUser()
                 {
                     CodeMeli = usr.CodeMeli ?? "",
@@ -41,7 +45,11 @@ namespace FitnessWebApp.Controllers
                     CodePosti = usr.CodePosti ?? "",
                     City = usr.City ?? "",
                     Ostan = usr.Ostan ?? "",
-
+                    RCBackSquat = usr.RCBackSquat ?? 0,
+                    RCPullUp = usr.RCPullUp ?? 0,
+                    RCRun = usr.RCRun ?? 0,
+                    Sex = SSex,
+                    Username = usr.Username ?? "", 
                 };
                 Res.MiniUser = miniUser;
                 Res.userBought = BLL.User.GetAllUserBought(UID);
@@ -234,6 +242,148 @@ namespace FitnessWebApp.Controllers
             return BLL.User.UpdateUserInfo(mUser);
         }
 
+        [AllowAnonymous]
+        [AcceptVerbs("Post")]
+        public async Task<UserInfoPro> UpdateUserProfilePro()
+        {
+            UserInfoPro resUserInfoPro = new UserInfoPro();
+
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.UpdateUserProfilePro, "", -101, "MimeMultipartContent"); }).Start();
+                    resUserInfoPro.Status = -101;
+                    return resUserInfoPro;
+
+                }
+
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                UserInfoPro mUserInfoPro = new UserInfoPro();
+
+                foreach (var itemContent in filesReadToProvider.Contents)
+                {
+                    if (itemContent.Headers.ContentDisposition.Name == "Object" || itemContent.Headers.ContentDisposition.Name == "\"Object\"")
+                    {
+                        var jsonString = await itemContent.ReadAsStringAsync();
+                        new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.UpdateUserProfilePro, "Json Khales", 21, jsonString); }).Start();
+
+                        var serializer = new JavaScriptSerializer();
+                        mUserInfoPro = serializer.Deserialize<UserInfoPro>(jsonString);
+
+
+                        var tmpUser = BLL.User.GetUserByUsername(mUserInfoPro.Username);
+                        if (tmpUser != null)
+                        {
+                            if (mUserInfoPro.UID == tmpUser.UID)
+                            {
+
+                            }
+                            else
+                            {
+                                resUserInfoPro.Status = -102;
+                                return resUserInfoPro;
+                            }
+                        }
+
+                        bool SEX = true;
+
+                        if (mUserInfoPro.Sex == 0)
+                            SEX = false;
+                        
+                        Com.User mUser = new User()
+                        {
+                            UID = mUserInfoPro.UID,
+                            Email = mUserInfoPro.Email,
+                            Name = mUserInfoPro.Name,
+                            RCBackSquat = mUserInfoPro.RCBackSquat,
+                            RCPullUp = mUserInfoPro.RCPullUp,
+                            RCRun = mUserInfoPro.RCRun,
+                            ScreenMode = mUserInfoPro.ScreenMode,
+                            Sex = SEX,//mUserInfoPro.Sex,
+                            Username = mUserInfoPro.Username,
+                        };
+
+                        if (BLL.User.UpdateUserInfoPro(mUser))
+                        {
+                            mUserInfoPro.Status = 0;
+                            return mUserInfoPro;
+                        }
+                        else
+                        {
+                            resUserInfoPro.Status = -103;
+                            return resUserInfoPro;
+                        }
+
+                    }
+                    else
+                    {
+                        new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.UpdateUserProfilePro, "", -106, "Ye Chize ezafi too req boode"); }).Start();
+                        resUserInfoPro.Status = -106;
+                        return resUserInfoPro;
+                    }
+                }
+                resUserInfoPro.Status = -104;
+                return resUserInfoPro;
+            }
+            catch (Exception ee)
+            {
+                new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.UpdateUserProfilePro, "", -105, ee.Message); }).Start();
+                resUserInfoPro.Status = -105;
+                return resUserInfoPro;
+            }
+        }
+
+
+
+        //[AcceptVerbs("Post")]
+        //[AllowAnonymous]
+        //public ResultUpdateInfoPro UpdateUserProfilePro([FromBody] UserInfoPro UserInfo)
+        //{
+        //    ResultUpdateInfoPro resultUpdateInfoPro = new ResultUpdateInfoPro();
+        //    try
+        //    {
+        //        var tmpUser = BLL.User.GetUserByUsername(UserInfo.Username);
+        //        if (tmpUser != null)
+        //        {
+        //            resultUpdateInfoPro.Error = true;
+        //            resultUpdateInfoPro.Res = -1;
+        //            return resultUpdateInfoPro;
+        //        }
+
+        //        Com.User mUser = new User()
+        //        {
+        //            UID = UserInfo.UID,
+        //            Email = UserInfo.Email,
+        //            Name = UserInfo.Name,
+        //            RCBackSquat = UserInfo.RCBackSquat,
+        //            RCPullUp = UserInfo.RCPullUp,
+        //            RCRun = UserInfo.RCRun,
+        //            ScreenMode = UserInfo.ScreenMode,
+        //            Sex = UserInfo.Sex,
+        //            Username = UserInfo.Username,
+        //        };
+
+        //        if (BLL.User.UpdateUserInfoPro(mUser))
+        //        {
+        //            resultUpdateInfoPro.Error = false;
+        //            resultUpdateInfoPro.Res = 0;
+        //            return resultUpdateInfoPro;
+        //        }
+        //        else
+        //        {
+        //            resultUpdateInfoPro.Error = true;
+        //            resultUpdateInfoPro.Res = -3;
+        //            return resultUpdateInfoPro;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        resultUpdateInfoPro.Error = true;
+        //        resultUpdateInfoPro.Res = -4;
+        //        return resultUpdateInfoPro;
+        //    }
+        //}
 
         [AllowAnonymous]
         [AcceptVerbs("Post")]
@@ -301,7 +451,7 @@ namespace FitnessWebApp.Controllers
                 return BadRequest();
             }
         }
-       
+
 
         //////////////////////////////////////////////////
         /// Help API For Controler       /////////////////
@@ -348,5 +498,6 @@ namespace FitnessWebApp.Controllers
                 return false;
             }
         }
+
     }
 }

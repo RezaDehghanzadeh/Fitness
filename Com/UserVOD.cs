@@ -22,5 +22,6 @@ namespace Com
         public string TypeVODStr { get; set; }
         public double Duration { get; set; }
         public string ItemVOD { get; set; }
+        public string PureContent { get; set; }
     }
 }

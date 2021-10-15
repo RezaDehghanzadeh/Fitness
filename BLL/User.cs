@@ -156,6 +156,26 @@ namespace BLL
                 return null;
             }
         }
+
+        public static List<Com.UserVOD> GetUserVODByTime(int UID, DateTime date)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.UserVODs.Where(D => D.UID == UID && D.Date == date.Date).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetUserVODByTime, date.ToString(), -100, e.Message);
+                });
+                return null;
+            }
+        }
+
         public static int addUserVOD(Com.UserVOD userVOD)
         {
             try
@@ -172,7 +192,7 @@ namespace BLL
             {
                 new System.Threading.Thread(delegate ()
                 {
-                    Log.DoLog(Com.Common.Action.addUserVOD, userVOD.UID.ToString(), -100, e.Message);
+                    Log.DoLog(Com.Common.Action.addUserVOD, "", -100, e.Message);
                 });
                 return -100;
             }
@@ -364,7 +384,24 @@ namespace BLL
                 return null;
             }
         }
-
+        public static Com.User GetUserByUsername(string Username)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    return ent.Users.Where(z => z.Username == Username).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetUserByUsername, Username, -100, e.Message);
+                });
+                return null;
+            }
+        }
         public static bool UpdateUserAfterLogin(Com.User mUser)
         {
             try
@@ -407,6 +444,37 @@ namespace BLL
                     Entry.Property(ex => ex.CodePosti).IsModified = true;
                     Entry.Property(ex => ex.City).IsModified = true;
                     Entry.Property(ex => ex.Ostan).IsModified = true;
+
+                    ent.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateUserInfo, mUser.UID.ToString(), -100, e.Message);
+                });
+                return false;
+            }
+        }
+        public static bool UpdateUserInfoPro(Com.User mUser)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.Users.Attach(mUser);
+                    var Entry = ent.Entry(mUser);
+                    Entry.Property(ex => ex.Name).IsModified = true;
+                    Entry.Property(ex => ex.FamilyName).IsModified = true;
+                    Entry.Property(ex => ex.Username).IsModified = true;
+                    Entry.Property(ex => ex.Email).IsModified = true;
+                    Entry.Property(ex => ex.Sex).IsModified = true;
+                    Entry.Property(ex => ex.ScreenMode).IsModified = true;
+                    Entry.Property(ex => ex.RCBackSquat).IsModified = true;
+                    Entry.Property(ex => ex.RCPullUp).IsModified = true;
+                    Entry.Property(ex => ex.RCRun).IsModified = true;
 
                     ent.SaveChanges();
                     return true;

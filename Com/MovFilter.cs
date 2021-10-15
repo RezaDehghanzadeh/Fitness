@@ -24,6 +24,11 @@ namespace Com
         public float PayeshMard { get; set; }
         public float PayeshZan { get; set; }
         public float ZaribSakhti { get; set; }
+        public float ZaribTaAdol { get; set; }
+        public float vaznNormalZhimnastik { get; set; }
+        public string WhichType { get; set; }
+        public string ShowStatus { get; set; }
+
 
     }
 }

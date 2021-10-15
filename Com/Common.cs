@@ -15,6 +15,8 @@ namespace Com
             AddTeacher,
             AddMovementTraining,
             AddMovementTrainingDetail,
+            AddVODMovment,
+            AddVODEquipment,
             AddPay,
             AddOrder,
             AddVOD,
@@ -32,6 +34,7 @@ namespace Com
             GetMovementTraining,
             GetMovementTrainingByFilter,
             GetUserByTellNumber,
+            GetUserByUsername,
             GetTeacherByID,
             GetPayByID,
             GetPayByBuyID,
@@ -42,6 +45,8 @@ namespace Com
             GetCommentByPID,
             GetDailyVODs,
             GetAllDailyVODs,
+            GetVODByFilter,
+            GetUserVODByTime,
             Logon,
             Login,
             SendSMS,
@@ -53,12 +58,14 @@ namespace Com
             UpdatePayAfterConfirm,
             UpdateVOD,
             UpdateMovement,
+            UpdateUserProfilePro,
             PostMovementDetail,
             PostUpdateMovementTrainingContext,
             PostProduct,
             PostUpdateProduct,
             PostMovement,
             PostVOD,
+            PostManualVOD,
             PostComment,
             PostDailyVOD,
             PostUpdateTeacher,
@@ -92,7 +99,7 @@ namespace Com
             GetMegaMovementTraining,
             CallBackPayResult,
             Buy,
-
+            RemoveMovementTraining
         }
     }
 
@@ -218,6 +225,11 @@ namespace Com
         public string CodePosti { get; set; }
         public string City { get; set; }
         public string Ostan { get; set; }
+        public string Username { get; set; }
+        public int Sex { get; set; }
+        public double RCBackSquat { get; set; }
+        public double RCPullUp { get; set; }
+        public double RCRun { get; set; }
     }
     public class UserInfo
     {
@@ -234,13 +246,35 @@ namespace Com
         public string City { get; set; }
         public string Ostan { get; set; }
     }
+
+    public class UserInfoPro
+    {
+        public int UID { get; set; }
+        public string Name { get; set; }
+        public string FamilyName { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public int Sex { get; set; }
+        public int ScreenMode { get; set; }
+        public float RCBackSquat { get; set; }
+        public float RCPullUp { get; set; }
+        public float RCRun { get; set; }
+        public int Status { get; set; }
+    }
+
+
     public class ResLastUserInfo
     {
         public MiniUser MiniUser { get; set; }
         public List<Com.UserBought> userBought { get; set; }
         public List<Com.UserMessage> userMessage { get; set; }
     }
+    public class ResultUpdateInfoPro
+    {
+        public bool Error { get; set; }
+        public int Res { get; set; }
 
+    }
 
     public class SpecDore
     {
@@ -275,5 +309,381 @@ namespace Com
 
     }
 
+    public partial class VODHandMade
+    {
+        public string Name { get; set; }
+        public string DesignerName { get; set; }
+        public int DesignerUID { get; set; }
+        public string Info { get; set; }
+        public string Round { get; set; }
+        public string Movment { get; set; }
+    }
 
+    public enum VODEditType
+    {
+        None,
+        Standard,
+        Set,
+        WithBuyInBuyOut,
+        Like211519,
+        Alternative,
+        OddEven,
+        RFT,
+        EStandard
+    }
+    public enum VODPattern
+    {
+        None,
+        AMRAP,
+        ForTime,
+        EMOM,
+        Tabata,
+        AHAP,
+        ForCompletion///fitness
+    }
+    public enum VODSpecial
+    {
+        None,
+        CrossFit,
+        Gymnastics,
+        Bodybuilding,
+        OlympicLifting,
+        PowerLift,
+        Two,
+        Swim,
+        StrongMan,
+        Heat,
+    }
+
+
+
+
+    public enum VODModifyTypeEnum
+    {
+        None,
+        Partner,
+        WarmUp,
+        Open,
+        Hero,
+        Girls,
+        Benchmark,
+        BodyBuilding,
+        TRX,
+    }
+
+    public enum VODEnrgy
+    {
+        None,
+        Phosphagen,//فسفاژن
+        LacticAcid,//اسید لاکتیک
+        Aerobic,//هوازی
+    }
+
+    public enum VODPublicSkill
+    {
+        None,
+        Strength,
+        Muscular,
+        Cardiovascular
+    }
+
+    public enum VODMaharatBadani
+    {
+        None,
+        Power,
+        Azolani,
+        Ghalbi,
+        PowerANDAzolani,
+        PowerANDGhalbi,
+        AzolaniANDGhalbi,
+        PowerANDAzolaniANDGhalbi
+    }
+
+    public enum VODTimeDuration
+    {
+        None,
+        Zire5,
+        az5ta10,
+        az10ta15,
+        az15ta20,
+        az20ta25,
+        az25ta30,
+        balaye30
+    }
+
+
+
+    public class VODFilterData
+    {
+        public List<int> Equipments { get; set; } //Movment
+        public List<int> MovmentNotToBe { get; set; } //Movment
+        public int Pattern { get; set; } //Movment
+        public int MovmentCount { get; set; }
+        public int TimeDuration { get; set; }
+        public int Modality { get; set; } ////Movment
+        public int Place { get; set; }
+        public int Body { get; set; }
+        public int Energy { get; set; }
+        public int PublicSkill { get; set; }
+    }
+
+    public class SearchInfoResult
+    {
+        public bool HasError { get; set; }
+        public List<Com.VOD> VODs { get; set; }
+        public string DescError { get; set; }
+    }
+
+    public class InfoVOD
+    {
+        public string VODName { get; set; }
+        public string NameAndFamilyName { get; set; }
+        public string Description { get; set; }
+        public string ManualProgram { get; set; }
+        public List<string> EditType { get; set; }
+        public List<string> Special { get; set; }
+        public List<string> Pattern { get; set; }
+        public List<string> Type { get; set; }
+        public List<string> EnergyPath { get; set; }
+        public List<string> PublicSkill { get; set; }
+        public List<string> Time { get; set; }
+    }
+    public class Round
+    {
+        public RoundDetail RX { get; set; }
+        public RoundDetail R2 { get; set; }
+        public RoundDetail R3 { get; set; }
+    }
+    public class RoundDetail
+    {
+        public float FTRound { get; set; }
+        public float AMRAP { get; set; }
+        public float TSet { get; set; }
+        public float CapTime { get; set; }
+        public float TRound { get; set; }
+        public float TWork { get; set; }
+        public float TimeRest { get; set; }
+        public float TimeEvery { get; set; }
+        public float TimeFor { get; set; }
+        public float RestBetMov { get; set; }
+        public float RestBetSet { get; set; }
+        public float RestBetRep { get; set; }
+        public float AddToTotalTime { get; set; }
+        public float AddToTotalRep { get; set; }
+        public float R1 { get; set; }
+        public float R2 { get; set; }
+        public float R3 { get; set; }
+        public float R4 { get; set; }
+        public float R5 { get; set; }
+        public float R6 { get; set; }
+        public float R7 { get; set; }
+        public float R8 { get; set; }
+        public float R9 { get; set; }
+        public float R10 { get; set; }
+        public float R11 { get; set; }
+        public float R12 { get; set; }
+        public float R13 { get; set; }
+        public float R14 { get; set; }
+        public float R15 { get; set; }
+        public float R16 { get; set; }
+        public float R17 { get; set; }
+        public float R18 { get; set; }
+        public float R19 { get; set; }
+        public float R20 { get; set; }
+    }
+    public class Mov
+    {
+        public string MovementType { get; set; }
+        public float KWeightScaled1 { get; set; }
+        public MovDetail RX { get; set; }
+        public MovDetail S2 { get; set; }
+        public MovDetail S3 { get; set; }
+    }
+    public class MovDetail
+    {
+        public string Part { get; set; }
+        public string SubPart { get; set; }
+        public string Movement { get; set; }
+        public float WeightMale { get; set; }
+        public float WeightFeMale { get; set; }
+        public float HeightMale { get; set; }
+        public float HeightFeMale { get; set; }
+        public float DistanceMale { get; set; }
+        public float DistanceFeMale { get; set; }
+        public float TimeMale { get; set; }
+        public float TimeFeMale { get; set; }
+        public float MWork { get; set; }
+        public float MRest { get; set; }
+        public float MRound { get; set; }
+        public float Call { get; set; }
+        public float MRestBetSet { get; set; }
+        public float RestBet { get; set; }
+        public float MSet { get; set; }
+        public float Rep { get; set; }
+    }
+
+    public class EvolvedVOD
+    {
+        public InfoVOD infoVOD { get; set; }
+        public Round round { get; set; }
+        public List<Mov> movs { get; set; }
+    }
+
+
+    public class EquationsSmartScaledOutput
+    {
+        public float Rep { get; set; }
+        public float Time { get; set; }
+        public float Distance { get; set; }
+        public float Weight { get; set; }
+        public bool Error { get; set; }
+        public string Desc { get; set; }
+    }
+    public class EquationsTotalTimeOutput
+    {
+        public float Time { get; set; }
+        public bool Error { get; set; }
+        public string Desc { get; set; }
+    }
+    public class EquationsEnergyPathwayOutput
+    {
+        public VODEnrgy VODenrgy { get; set; }
+        public bool Error { get; set; }
+        public string Desc { get; set; }
+    }
+    public class EquationsGPPOutput
+    {
+        public VODMaharatBadani VODMaharatBadani { get; set; }
+        public bool Error { get; set; }
+        public string Desc { get; set; }
+    }
+
+    public class EquationsInput
+    {
+        public VODEditType EditionType { get; set; }
+        public VODPattern Pattern { get; set; }
+        public float Pr { get; set; }
+        public float W { get; set; }
+        public float T { get; set; }
+        public float T_BetRest { get; set; }
+        public float Dis { get; set; }
+        public float Nrep { get; set; }
+        public float Nset { get; set; }
+    }
+
+
+
+
+
+    public class UnitMov
+    {
+        public string id { get; set; }
+        public List<Param> Units { get; set; }
+    }
+    public class Param
+    {
+        public string Title { get; set; }
+        public string id { get; set; }
+        public bool Enable { get; set; }
+        public string Value { get; set; }
+        public string ValueType { get; set; }
+        public List<MicroParam> Units { get; set; }
+    }
+
+    public class MicroParam
+    {
+        public string Title { get; set; }
+        public string id { get; set; }
+        public bool Selected { get; set; }
+    }
+    public class ScoreData
+    {
+        int UID { get; set; }
+        int VID { get; set; }
+        List<int> Trep { get; set; }
+        List<int> Nrep { get; set; }
+        List<int> Crep { get; set; }
+
+    }
+
+    public class ManualVOD
+    {
+        public int UID { get; set; }
+        public string Name { get; set; }
+        public string VODPattern { get; set; }
+        public string VODEditType { get; set; }
+        public List<ManualMovement> MovmentName { get; set; }
+        //param
+        public int RoundForTime { get; set; }
+        public int Round { get; set; }
+        public int Work { get; set; }
+        public int TimeCap { get; set; }
+        public int minAMRAP { get; set; }
+        public int Every { get; set; }
+        public int MinOnTheMinFor { get; set; }
+        public int RestbetweenSets { get; set; }
+        public int Rest { get; set; }
+        public List<int> Reps { get; set; }
+        public string StartTime { get; set; }
+    }
+
+    public class ManualMovement
+    {
+        public string MovmentName { get; set; }
+        public List<zirMajmooe> SeriZirMajmooe { get; set; }
+    }
+
+    public class zirMajmooe
+    {
+        public string ID { get; set; }
+        public float Value { get; set; }
+        public string UintID { get; set; }
+    }
+
+    public class EquationsOutput
+    {
+        public int WodexScore { get; set; }
+        public string GPP { get; set; }
+        public string EnergyPathway { get; set; }
+        public int SmartScaled { get; set; }
+        public int TotalTime { get; set; }
+        public int Status { get; set; }
+    }
+
+    public class MehrSugest
+    {
+        public string MovementName { get; set; }
+        public string MovementPart { get; set; }
+        public string MovementSubpart { get; set; }
+
+
+
+        public int Rounds { get; set; }
+        public bool RoundsSelected { get; set; }//fekr konam in IsSelected ha ezafe hastan
+
+        public int Work { get; set; }
+        public bool WorkSelected { get; set; }
+
+        public int Rest { get; set; }
+        public bool RestSelected { get; set; }
+
+        public int Sets { get; set; }
+        public bool SetsSelected { get; set; }
+
+        public int Reps { get; set; }
+        public int MaxReps { get; set; }
+        public bool RepsSelected { get; set; }
+
+        public int Weight { get; set; }
+        public string WeightYEKA { get; set; }//KG ? IB???
+
+        public int Distance { get; set; }
+        public string DistanceYEKA { get; set; }//m?? feet? cal ? km? yard? mile?
+
+        public int Height { get; set; }
+        public string HeightYEKA { get; set; }//cm?? inch? meter ? feet? 
+
+        public int minSec { get; set; }// in bayad tabdil be Saniye beshe, befresti
+        public bool minSecSelected { get; set; }
+    }
 }

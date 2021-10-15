@@ -18,7 +18,9 @@ namespace Fitness_Managment
     public partial class FormMahsoolat : Form
     {
         //string BaseAddress = "http://localhost:56271/";
-        string BaseAddress = "https://www.hasma.ir/";
+        //string BaseAddress = "https://www.hasma.ir/";
+        string BaseAddress = "http://193.105.234.83/";
+
         List<Com.Product> AllBookProducts;
         List<Com.Product> AllDoreProducts;
         List<Com.Teacher> AllTeachers;
@@ -79,7 +81,7 @@ namespace Fitness_Managment
                 try
                 {
 
-                    System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Product/" + SelectedProduct.PID.ToString() + "/" + ImgCount + ".jpg");
+                    System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "FitnessResource/Product/" + SelectedProduct.PID.ToString() + "/" + ImgCount + ".jpg");
                     System.Net.WebResponse response = request.GetResponse();
                     Stream responseStream = response.GetResponseStream();
                     publicBitmapBookSelected = new Bitmap(responseStream);
@@ -121,7 +123,7 @@ namespace Fitness_Managment
                 {
                     try
                     {
-                        System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Product/" + BookItem.PID.ToString() + "/0.jpg");
+                        System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "FitnessResource/Product/" + BookItem.PID.ToString() + "/0.jpg");
                         System.Net.WebResponse response = request.GetResponse();
                         Stream responseStream = response.GetResponseStream();
                         Bitmap bitmapBookItm = new Bitmap(responseStream);
@@ -580,7 +582,7 @@ namespace Fitness_Managment
 
                 foreach (var DoreItem in AllDoreProducts)
                 {
-                    System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Product/" + DoreItem.PID.ToString() + "/0.jpg");
+                    System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "/FitnessResource/Product/" + DoreItem.PID.ToString() + "/0.jpg");
                     System.Net.WebResponse response = request.GetResponse();
                     Stream responseStream = response.GetResponseStream();
                     Bitmap bitmapBookItm = new Bitmap(responseStream);
@@ -670,7 +672,7 @@ namespace Fitness_Managment
             }
 
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Product/" + SelectedProduct.PID.ToString() + "/0.jpg");
+            System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "/FitnessResource/Product/" + SelectedProduct.PID.ToString() + "/0.jpg");
             System.Net.WebResponse response = request.GetResponse();
             Stream responseStream = response.GetResponseStream();
             pictureBox2.Image = new Bitmap(responseStream);

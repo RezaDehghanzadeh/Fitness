@@ -18,7 +18,8 @@ namespace Fitness_Managment
     public partial class FormOstad : Form
     {
        // string BaseAddress = "http://localhost:56271/";
-         string BaseAddress = "https://www.hasma.ir/";
+       //  string BaseAddress = "https://www.hasma.ir/";
+        string BaseAddress = "http://193.105.234.83/";
 
         List<Com.Teacher> AllTeachers;
 
@@ -86,7 +87,7 @@ namespace Fitness_Managment
                     Bitmap bitmapBookItm = null;
                     try
                     {
-                        System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Teacher/" + itemTea.TID.ToString() + "/Img.jpg");
+                        System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "FitnessResource/Teacher/" + itemTea.TID.ToString() + "/Img.jpg");
                         System.Net.WebResponse response = request.GetResponse();
                         Stream responseStream = response.GetResponseStream();
                         bitmapBookItm = new Bitmap(responseStream);
@@ -128,7 +129,7 @@ namespace Fitness_Managment
             textBoxOnvan.Text = SelectedTeach.ScienceRanking.ToString();
             try
             {
-                System.Net.WebRequest request = System.Net.WebRequest.Create("https://www.hasma.ir/FitnessResource/Teacher/" + SelectedTID.ToString() + "/Img.jpg");
+                System.Net.WebRequest request = System.Net.WebRequest.Create(BaseAddress + "FitnessResource/Teacher/" + SelectedTID.ToString() + "/Img.jpg");
                 System.Net.WebResponse response = request.GetResponse();
                 Stream responseStream = response.GetResponseStream();
                 var publicBitmapBookSelected = new Bitmap(responseStream);

@@ -18,9 +18,9 @@ namespace Fitness_Managment
     public partial class FormAmoozesh : Form
     {
         //string BaseAddress = "http://localhost:56271/";
-        string BaseAddress = "https://www.hasma.ir/";
+        //string BaseAddress = "https://www.hasma.ir/";
         //string BaseAddress = "http://193.105.234.83:80/";
-
+        string BaseAddress = "http://193.105.234.83/";
         public FormAmoozesh()
         {
             InitializeComponent();
@@ -29,10 +29,10 @@ namespace Fitness_Managment
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox2.Enabled = true;
-            string[] installsVazneBardari = new string[] { "هالتر", "دمبل", "کتل بل", "مدیسن بال" };
-            string[] installsZhimnastik = new string[] { "میله و دارحلقه", "با وزن بدن", "با تجهیزات" };
+            string[] installsVazneBardari = new string[] { "هالتر", "دمبل", "کتل بل", "تجهیزات" };
+            string[] installsZhimnastik = new string[] { "میله و دارحلقه", "وزن بدن" };
             string[] installsKardio = new string[] { "کاردیو" };
-            string[] installsParvareshAndam = new string[] { "سرشانه", "سینه", "پشت", "بازو و ساعد", "ران و ساق" };
+            string[] installsParvareshAndam = new string[] { "سرشانه", "سینه", "پشت", "بازو و ساعد", "ران و ساق", "میان تنه" };
             string[] installsTRX = new string[] { "بالاتنه", "پایین تنه" };
             string[] installsKesheshi = new string[] { "بالاتنه", "پایین تنه" };
 
@@ -41,6 +41,8 @@ namespace Fitness_Managment
             comboBox3.Text = "Select";
 
             switch (comboBox1.SelectedItem)
+
+
             {
                 case "وزنه برداری":
                     comboBox2.Items.AddRange(installsVazneBardari);
@@ -54,7 +56,7 @@ namespace Fitness_Managment
                 case "پرورش اندام":
                     comboBox2.Items.AddRange(installsParvareshAndam);
                     break;
-                case "کششی":
+                case "کش مقاومتی":
                     comboBox2.Items.AddRange(installsKesheshi);
                     break;
                 case "تی آر ایکس":
@@ -71,155 +73,336 @@ namespace Fitness_Managment
         {
 
             string[] Halter = new string[] {
-               "Shoulder press",
-               "Push press",
-               "Push Jerk",
-               "SplitJerk",
-               "Snatch Balance",
-               "Sots Press",
-               "Thruster",
-               "Back Squat",
-               "Front Squat",
-               "Overhead squat",
-               "Zercher Squat",
-               "Bulgarian Split Squat",
-               "Deadlift",
-               "Sumo Deadlift",
-               "Snatch Deadlift",
-               "Sumo Deadlift High Pull",
-               "Back Rack Lunge",
-               "Front Rack Lunge",
-               "Overhead Lunge",
-               "Zercher Lunge",
-               "SideLunge",
-               "Back Rack Walking Lunge",
-               "Front Rack Walking Lunge",
-               "Overhead Walking Lunge",
-               "Zercher Walking Lunge",
-               "Squat Snatch",
-               "Power Snatch",
-               "Hang Snatch",
-               "Power Hang Snatch",
-               "High Hang Snatch",
-               "Power High Hang Snatch",
-               "Tall Snatch",
-               "Power Tall Snatch",
-               "Muscle Snatch",
-               "Hang Muscle Snatch",
-               "French Snatch",
-               "Squat Clean",
-               "Power Clean",
-               "Hang Clean",
-               "Power Hang Clean",
-               "High Hang Clean",
-               "Power High Hang Clean",
-               "Tall Clean",
-               "Power Tall Clean",
-               "Muscle Clean",
-               "Clean & Push Jerk",
-               "Power Clean & Push Jerk ",
-               "Clean & Split Jerk",
-               "Power Clean & Split Jerk ",
-               "Hang Clean & Push Jerk",
-               "Hang Power Clean & Push Jerk ",
-               "Hang Clean & Split Jerk",
-               "Hang Power Clean & Split Jerk ",
-               "Muscle Clean & Push Jerk",
-               "Muscle Clean & Split Jerk",
-               "Cluster",
-               "Floor Press",
-               "Good Morning",
-               "Burgener Warm Up"
+"Shoulder Press",
+"Push Press",
+"Push Jerk",
+"Split Jerk",
+"Snatch Balance",
+"Sots Press",
+"Thruster",
+"Back Squat",
+"Front Squat",
+"Overhead Squat",
+"Zercher Squat",
+"Bulgarian Split Squat",
+"Deadlift",
+"Romanian Deadlift",
+"Deficit Deadlift",
+"Sumo Deadlift",
+"Snatch Deadlift",
+"Sumo Deadlift High Pull",
+"Back Rack Lunge",
+"Front Rack Lunge",
+"Overhead Lunge",
+"Zercher Lunge",
+"Back Rack Walking Lunge",
+"Front Rack Walking Lunge",
+"Overhead Walking Lunge",
+"Zercher Walking Lunge",
+"Bench Press",
+"Good Morning",
+"Ground to Shoulder",
+"Shoulder to Overhead",
+"Ground to Overhead",
+"Snatch Pull",
+"Snatch",
+"Squat Snatch",
+"Power Snatch",
+"Hang Snatch",
+"Hang Squat Snatch",
+"Hang Power Snatch",
+"High Hang Snatch",
+"High Hang Squat Snatch",
+"High Hang Power Snatch",
+"Tall Snatch",
+"Tall Squat Snatch",
+"Tall Power Snatch",
+"Muscle Snatch",
+"Hang Muscle Snatch",
+"Tall Muscle Snatch",
+"Split Snatch",
+"Hang Split Snatch",
+"Tall Split Snatch",
+"Clean Pull",
+"Clean",
+"Squat Clean",
+"Power Clean",
+"Hang Clean",
+"Hang Squat Clean",
+"Hang Power Clean",
+"High Hang Clean",
+"High Hang Squat Clean",
+"High Hang  Power Clean",
+"Tall Clean",
+"Tall Squat Clean",
+"Tall Power Clean",
+"Muscle Clean",
+"Hang Muscle Clean",
+"Tall Muscle Clean",
+"Split Clean",
+"Hang Split Clean",
+"Tall Split Clean",
+"Clean & Jerk",
+"Squat Clean & Push Jerk",
+"Power clean & Push Jerk",
+"Squat Clean & Split Jerk",
+"Power Clean & Split Jerk",
+"Hang Clean & Jerk",
+"Hang Squat Clean & Push Jerk",
+"Hang Power Clean & Push Jerk",
+"Hang Squat Clean & Split Jerk",
+"Hang Power Clean & Split Jerk",
+"Tall Clean & Jerk",
+"Tall Squat Clean & Push Jerk",
+"Tall Power Clean & Push Jerk",
+"Tall Squat Clean & Split Jerk",
+"Tall Power Clean & Split Jerk",
+"Muscle Clean & Push Jerk",
+"Muscle Clean & Split Jerk",
+"Cluster",
+"Hang Cluster",
+"Burgener Warm-up",
+"Farmer Carry",
+"Yoke Carry"
             };
 
             string[] Dumbbell = new string[] {
-    "DB Shoulder press",
-    "DB Push press",
-    "DB Push Jerk",
-    "DB SplitJerk",
-    "DB Snatch Balance",
-    "DB Thruster",
-    "DB Squat",
-    "DB Front Squat",
-    "DB Overhead squat",
-    "Doual DB Overhead squat",
-    "DB Goblet Squat",
-    "DB Deadlift",
-    "DB Sumo Deadlift",
-    "DB Sumo Deadlift High Pull",
-    "DB Lunge",
-    "DB Front Rack Lunge",
-    "DB Overhead Lunge",
-    "DB Walking Lunge",
-    "DB Front Rack Walking Lunge",
-    "DB Overhead Walking Lunge",
-    "DB Squat Snatch",
-    "DB Power Snatch",
-    "DB Hang Snatch",
-    "DB Power Hang Snatch",
-    "DB High Hang Snatch",
-    "DB Power High Hang Snatch",
-    "DB Muscle Snatch",
-    "DB Hang Muscle Snatch",
-    "Alternating DB Snatch",
-    "AlternatingDBHangMuscleSnatch",
-    "DB Squat Clean",
-    "DB Power Clean",
-    "DB Hang Clean",
-    "DB Power Hang Clean",
-    "DB High Hang Clean",
-    "DB Power High Hang Clean",
-    "DB Muscle Clean",
-    "DB Hang Muscle Clean",
-    "DB Clean & Push Jerk",
-    "DB Power Clean & Push Jerk ",
-    "DB Power Clean & Split Jerk ",
-    "DB Hang Clean & Push Jerk",
-    "DB Hang Power Clean & Push Jerk ",
-    "DB Hang Clean & Split Jerk",
-    "DB Hang Power Clean & Split Jerk ",
-    "DB High Hang Clean & Push Jerk",
-    "DB High Hang Power Clean & Push Jerk ",
-    "DB High Hang Clean & Split Jerk",
-    "DB High Hang Power Clean & Split Jerk ",
-    "DB Muscle Clean & Push Jerk",
-    "DB Muscle Clean & Split Jerk",
-    "DB Hang Muscle Clean & Push Jerk",
-    "DB Hang Muscle Clean & Split Jerk",
-    "DB Cluster",
-    "DB Hang Cluster",
-    "DB Swing (USA)",
-    "DB Swing (RUS)",
-    "DB Turkish Get Up",
-    "DB Farmer Carry",
-    "DB Floor Press",
-    "DB Burpee",
-    "DB Farmer Carry",
+"DB Shoulder Press",
+"Single arm DB Shoulder Press",
+"DB Push Press",
+"Single arm DB Push Press",
+"DB Push Jerk",
+"Single arm DB Push Jerk",
+"DB Split Jerk",
+"Single arm DB Split Jerk",
+"DB Thruster",
+"Single arm DB Thruster",
+"DB Squat",
+"DB Front Squat",
+"DB Overhead Squat",
+"Double arm DB Overhead Squat",
+"Single arm DB Overhead Squat",
+"Right arm DB Overhead Squat",
+"Left arm DB Overhead Squat",
+"DB Goblet Squat",
+"DB Deadlift",
+"DB Sumo Deadlift",
+"DB Sumo Deadlift High Pull",
+"DB Lunge",
+"DB Front Rack Lunge",
+"DB Overhead Lunge",
+"Single arm DB Overhead Lunge",
+"Right arm DB Overhead Lunge",
+"Left arm DB Overhead Lunge",
+"DB Walking Lunge",
+"DB Front Rack Walking Lunge",
+"DB Overhead Walking Lunge",
+"Single arm DB Overhead Walking Lunge",
+"Right arm DB Overhead Walking Lunge",
+"Left arm DB Overhead Walking Lunge",
+"DB Swing",
+"DB Swing (USA)",
+"DB Swing (RUS)",
+"DB Ground to Shoulder",
+"DB Shoulder to Overhead",
+"DB Ground to Overhead",
+"DB Snatch",
+"DB Squat Snatch",
+"DB Power Snatch",
+"DB Hang Snatch",
+"DB Hang Squat Snatch",
+"DB Hang Power Snatch",
+"DB High Hang Snatch",
+"DB High Hang Squat Snatch",
+"DB High Hang Power Snatch",
+"DB Tall Snatch",
+"DB Tall Squat Snatch",
+"DB Tall Power Snatch",
+"DB Muscle Snatch",
+"DB Hang Muscle Snatch",
+"DB Tall Muscle Snatch",
+"Alternating DB Snatch",
+"Alternating DB Squat Snatch",
+"Alternating DB Power Snatch",
+"Alternating DB Hang Snatch",
+"Alternating DB Hang Squat Snatch",
+"Alternating DB Hang Power Snatch",
+"Alternating DB High Hang Snatch",
+"Alternating DB High Hang Squat Snatch",
+"Alternating DB High Hang Power Snatch",
+"Alternating DB Tall Snatch",
+"Alternating DB Tall Squat Snatch",
+"Alternating DB Tall Power Snatch",
+"Alternating DB Muscle Snatch",
+"DB Clean",
+"DB Squat Clean",
+"DB Power Clean",
+"DB Hang Clean",
+"DB Hang Squat Clean",
+"DB Hang Power Clean",
+"DB High Hang Clean",
+"DB High Hang Squat Clean",
+"DB High Hang Power Clean",
+"DB Tall Clean",
+"DB Tall Squat Clean",
+"DB Tall Power Clean",
+"DB Muscle Clean",
+"DB Hang Muscle Clean",
+"DB Tall Muscle Clean",
+"Single arm DB Clean",
+"Right arm DB Clean",
+"Left arm DB Clean",
+"Single arm DB Squat Clean",
+"Right arm DB Squat Clean",
+"Left arm DB Squat Clean",
+"Single arm DB Power Clean",
+"Right arm DB Power Clean",
+"Left arm DB Power Clean",
+"Single arm DB Hang Squat Clean",
+"Right arm DB Hang Squat Clean",
+"Left arm DB Hang Squat Clean",
+"Single arm DB Hang Power Clean",
+"Right arm DB Hang Power Clean",
+"Left arm DB Hang Power Clean",
+"Alternating DB Clean",
+"Alternating DB Squat Clean",
+"Alternating DB Power Clean",
+"Alternating DB Hang Clean",
+"Alternating DB Hang Squat Clean",
+"Alternating DB Hang Power Clean",
+"Alternating DB High Hang Clean",
+"Alternating DB High Hang Squat Clean",
+"Alternating DB High Hang Power Clean",
+"Alternating DB Tall Clean",
+"Alternating DB Tall Squat Clean",
+"Alternating DB Tall Power Clean",
+"Alternating DB Muscle Clean",
+"DB Clean & Jerk",
+"DB Squat Clean & Push Jerk",
+"DB Power Clean & Push Jerk",
+"DB Squat Clean & Split Jerk",
+"DB Power Clean & Split Jerk",
+"DB Hang Clean & Jerk",
+"DB Hang Squat Clean & Push Jerk",
+"DB Hang Power Clean & Push Jerk",
+"DB Hang Squat Clean & Split Jerk",
+"DB Hang Power Clean & Split Jerk",
+"DB High Hang Clean & Jerk",
+"DB High Hang Squat Clean & Push Jerk",
+"DB High Hang Power Clean & Push Jerk",
+"DB High Hang Squat Clean & Split Jerk",
+"DB High Hang Power Clean & Split Jerk",
+"DB Muscle Clean & Push Jerk",
+"DB Muscle Clean & Split Jerk",
+"DB Hang Muscle Clean & Push Jerk",
+"DB Hang Muscle Clean & Split Jerk",
+"DB Cluster",
+"DB Hang Cluster",
+"Devil Press",
+"Single Arm DB Clean & jerk",
+"Single Arm DB Squat Clean & Push jerk",
+"Single Arm DB Power Clean & Push jerk",
+"Single Arm DB Hang Squat Clean & Push jerk",
+"Single Arm DB Hang Power Clean & Push jerk",
+"Single Arm DB High Hang Squat Clean & Push jerk",
+"Single Arm DB High Hang Power Clean & Push jerk",
+"DB Burpee",
+"DB Farmer Carry",
+"DB Turkish Get up",
+"Right arm DB Turkish Get up",
+"Left arm DB Turkish Get up"
             };
             string[] Kettlebell = new string[] {
-    "KB Squat",
-    "KB Front Squat",
-    "KB Overhead squat",
-    "KB Goblet Squat",
-    "KB Deadlift",
-    "KB Sumo Deadlift",
-    "KB Sumo Deadlift High Pull",
-    "KB Single Leg Deadlift",
-    "Double KB Deadlift",
-    "KB Lunge",
-    "KB Front Rack Lunge",
-    "KB Overhead Lunge",
-    "KB Walking Lunge",
-    "KB Front Rack Walking Lunge",
-    "KB Overhead Walking Lunge",
-    "KB Snatch",
-    "KB Clean",
-    "KB Swing (USA)",
-    "KB Swing (RUS)",
-    "One Arm KB Swing (USA)",
-    "One Arm KB Swing (RUS)",
-    "KB Turkish Get Up",
-    "KB Farmer Carry",
+"KB Shoulder Press",
+"Single arm KB Shoulder Press",
+"KB Push Press",
+"Single arm KB Push Press",
+"KB Push Jerk",
+"Single arm KB Push Jerk",
+"KB Thruster",
+"Single arm KB Thruster",
+"KB Squat",
+"KB Front Squat",
+"KB Overhead Squat",
+"Single arm KB Overhead Squat",
+"Right arm KB Overhead Squat",
+"Left arm KB Overhead Squat",
+"KB Goblet Squat",
+"KB Deadlift",
+"KB Sumo Deadlift",
+"KB Sumo Deadlift High Pull",
+"KB Single Leg Deadlift",
+"Double KB Single-Leg Deadlift",
+"KB Lunge",
+"KB Front Rack Lunge",
+"KB Overhead Lunge",
+"KB Walking Lunge",
+"KB Front Rack Walking Lunge",
+"KB Overhead Walking Lunge",
+"KB Swing",
+"KB Swing (USA)",
+"KB Swing (RUS)",
+"Single arm KB Swing (USA)",
+"Single arm KB Swing (RUS)",
+"KB Ground to Shoulder",
+"KB Shoulder to Overhead",
+"KB Ground to Overhead",
+"KB Snatch",
+"KB Squat Snatch",
+"KB Power Snatch",
+"KB Hang Snatch",
+"KB Hang Squat Snatch",
+"KB Hang Power Snatch",
+"KB Tall Snatch",
+"KB Tall Squat Snatch",
+"KB Tall Power Snatch",
+"KB Muscle Snatch",
+"KB Hang Muscle Snatch",
+"KB Tall Muscle Snatch",
+"Alternating KB Snatch",
+"Alternating KB Squat Snatch",
+"Alternating KB Power Snatch",
+"Alternating KB Hang Snatch",
+"Alternating KB Hang Squat Snatch",
+"Alternating KB Hang Power Snatch",
+"Alternating KB Tall Snatch",
+"Alternating KB Tall Squat Snatch",
+"Alternating KB Tall Power Snatch",
+"Alternating KB Muscle Snatch",
+"KB Clean",
+"KB Squat Clean",
+"KB Power Clean",
+"KB Hang Clean",
+"KB Hang Squat Clean",
+"KB Hang Power Clean",
+"KB Tall Clean",
+"KB Tall Squat Clean",
+"KB Tall Power Clean",
+"KB Muscle Clean",
+"KB Hang Muscle Clean",
+"KB Tall Muscle Clean",
+"Single arm KB Clean",
+"Right arm KB Clean",
+"Left arm KB Clean",
+"Alternating KB Clean",
+"Alternating KB Squat Clean",
+"Alternating KB Power Clean",
+"Alternating KB Hang Clean",
+"Alternating KB Hang Squat Clean",
+"Alternating KB Hang Power Clean",
+"Alternating KB Tall Clean",
+"Alternating KB Tall Squat Clean",
+"Alternating KB Tall Power Clean",
+"Alternating KB Muscle Clean",
+"KB Clean & Jerk",
+"KB Squat Clean & Jerk",
+"KB Power Clean & Jerk",
+"KB Farmer Carry",
+"KB Step up",
+"KB Turkish Get up",
+"Right arm KB Turkish Get up",
+"Right arm KB Turkish Get up",
+
             };
 
 
@@ -232,270 +415,690 @@ namespace Fitness_Managment
         "Ball Slam"
         };
             string[] BarAndring = new string[] {
-    "Ring swing",
-    "Kip swing",
-    "Ring pull up",
-    "Chin to bar",
-    "Chest to bar",
-    "Close grip chin pull up",
-    "Bar mucle up",
-    "Ring muscle up",
-    "Inverted row",
-    "Ring row",
-    "Toes to bar",
-    "Rise the knee",
-    "L-sit/hold",
-    "Ring dip",
-    "Wind shield wipers bar",
-    "Tuck front",
-    "Tucked back lever",
+"Inverted Row",
+"Dip",
+"Bar Dip",
+"Strict Bar Dip",
+"Kipping Bar Dip",
+"Kip Swing",
+"Resistance Band Assisted Pull up",
+"Box Assisted Pull up",
+"Pull up",
+"Strict Pull up",
+"Kipping Pull up",
+"Bar Pull up",
+"Strict Bar Pull up",
+"Kipping Bar Pull up",
+"Supinated Grip Pull up",
+"L Pull up",
+"Close Grip Pull up",
+"Chin to Bar Pull up",
+"Chest to Bar Pull up",
+"Strict Chest to Bar Pull up",
+"Kipping Chest to Bar Pull up",
+"Butterfly Pull up",
+"Burpee Pull up",
+"Muscle up",
+"Bar Muscle up",
+"Strict Bar Muscle up",
+"Kipping Bar Muscle up",
+"Glide Kip",
+"Pull Over",
+"Knees Raise",
+"Knees to Elbows",
+"Strict Knees to Elbows",
+"Kipping Knees to Elbows",
+"Toes to Bar",
+"Strict Toes to Bar",
+"Kipping Toes to Bar",
+"Hanging L Sit",
+"Windshield Wipers Bar",
+"Tuck Front Lever",
+"Tuck Back Lever",
+"Ring Row",
+"Ring Push up",
+"Ring Dip",
+"Strict Ring Dip",
+"Kiping Ring Dip",
+"Ring Swing",
+"Box Assisted Ring Pull-up",
+"Ring Pull up",
+"Strict Ring Pull up",
+"Kipping Ring Pull up",
+"Chest to Ring Pull up",
+"Strict Chest to Ring Pull up",
+"Kipping Chest to Ring Pull up",
+"Ring Muscle up",
+"Strict Ring Muscle up",
+"Kipping Ring Muscle up",
+"Toes to Rings",
+"Strict Toes to Rings",
+"Kipping Toes to Rings",
+"L Sit on Rings",
+"Forward Roll from Support",
+"Backward Roll to Support",
+"Skin the Cat",
+
             };
 
             string[] BodyWeight = new string[] {
-  "Air squat",
-  "Pistol squat",
-  "Squat jump",
-  "Burpee",
-  "Bar facing burpee",
-  "Burpee box jump over",
-  "Push up",
-  "Hand release push up",
-  "Diamond push up",
-  "Superman push up",
-  "Wall walk",
-  "Handstand walk",
-  "Hand stand push up",
-  "Dip",
-  "Bear crowl",
-  "Hollow rock",
-  "Superman",
-  "Mountain climber",
-  "Plank",
-  "Side plank",
-  "L-sit hold",
-  "Crunch",
-  "V sit",
-  "V- sit up",
-  "Horizontal jump",
+"Air Squat",
+"Narrow Stance Air Squat",
+"Pistol squat",
+"Alternating Pistol squat",
+"Single Leg Squat",
+"Alternating Single Leg Squat",
+"Jumping Squat",
+"Lunge",
+"Jumping lunge",
+"Shoulder Tap",
+"Modified Push up",
+"Push up",
+"Hand Release Push up",
+"Knuckle Pus up",
+"Biceps Push up",
+"Triceps Push up",
+"Diamond Push up",
+"Split Push up",
+"Wide Push up",
+"Russian Push up",
+"Superman Push up",
+"Spiderman Push up",
+"Toe Touch Push up",
+"Inchworm Push up",
+"Clapping Push up",
+"Chest Slap Push up",
+"Pike Press",
+"Pike Push up",
+"Nordic Hamstring Curl",
+"Burpee",
+"Burpee Over the Bar",
+"Bar Facing Burpee",
+"Burpee Box Jump Over",
+"Burpee Broad Jump",
+"Burpee Over Rower",
+"Burpee Over Object",
+"Belushi Burpee",
+"Burpee Jack",
+"Inverted Burpee",
+"Wall Walk",
+"Handstand Hold",
+"Freestanding Handstand Hold",
+"L Sit to Shoulder Stand",
+"Straddle Press to Handstand",
+"Handstand Walk",
+"Handstand Push up",
+"Strict Handstand Push up",
+"Kipping Handstand Push up",
+"Chest to Wall Handstand Push up",
+"Deficit Handstand Push up",
+"Strict Deficit Handstand Push up",
+"Kipping Deficit Handstand Push up",
+"Parallette Handstand Push up",
+"Freestanding Handstand Push up",
+"Shoot Through",
+"Bear Crawl",
+"Crab Walk",
+"Mountain Climber",
+"Box Step up",
+"Box jump",
+"Single Leg Box jump",
+"Broad jump",
+"Plank",
+"Up & Down Plank",
+"Sit up",
+"Crunch",
+"Butterfly Sit-up",
+"Hollow Hold",
+"Hollow Rock",
+"V Sit",
+"V Up",
+"Candlestick",
+"L sit Hold",
+"L Sit Leg Lift",
+"Evil Wheel",
+"Sit up to Stand up",
+"Abmat Sit up",
+"GHD Sit up",
+"GHD Hip Extension",
+"GHD Back Extension",
+"GHD Hip & Back Extension",
+"Glute Ham Raise",
+"Rope Climb",
+"Modified Rope Climb",
+"Lying to Stand Rope Climb",
+"Rope Climb (Standard)",
+"Rope Climb (Wrapping)",
+"Rope Climb (Basket)",
+"Leg Less Rope Climb",
+"L Sit Rope Climb",
+"Pegboard Accent",
+"SLIPS"
             };
 
             string[] Equipmentbeased = new string[] {
-     "Box jump",
-     "One leg jump",
-     "Pike press",
-    "Pike push up",
-    "Burpee box jump over",
-    "Rope climb (standard)",
-    "Leg less climb",
-    "Lying to stand",
-    "Abmat sit up",
-    "GHD sit up",
-    "GHD hip extension",
-    "GHD back extension",
-    "GHD hip and back extension"
+"D Ball Bearhug Hold",
+"D Ball Squat",
+"MB Squat",
+"MB Lunge",
+"MB Lunge Rotation",
+"MB Deadlift",
+"MB Push up",
+"MB Rolling Push up",
+"MB Sit up",
+"MB Russian Twist",
+"Lateral Ball Toss",
+"Leg lever to Ball",
+"MB Sit up to Stand up",
+"MB Snatch",
+"MB Clean",
+"MB Ground to Shoulder",
+"MB Shoulder to Overhead",
+"MB Ground to Overhead",
+"Wall Ball Shot",
+"Slam Ball",
+"MB Over the Shoulder",
+"SB Bearhug Hold",
+"SB Squat",
+"SB Deadlift",
+"SB Clean",
+"SB Ground to Shoulder",
+"SB Shoulder to Overhead",
+"SB Ground to Overhead",
+"SB Farmer Carry",
+"SB Over the Shoulder",
+"SB Throw",
+"SB Overhead Toss",
+"Sled Drag",
+"Sled Pull",
+"Sled Reverse Pull",
+"Arm over arm Sled Pull",
+"Sled Push",
+"Tire Front Squat",
+"Tire Deadlift",
+"Tire Farmer Deadlift",
+"Tire Leg Press",
+"Tire Chest Press",
+"Tire Jump",
+"Tire Decline Push-up",
+"Tire Incline Push-up",
+"Tire Shoulder Push-up",
+"Sledge Hammer",
+"Right arm Sledge Hammer",
+"Left arm Sledge Hammer",
+"Tire Flip",
+"Tire Drag",
+"Tire Pull",
+"Tire Reverse Pull",
+"Tire Push",
+"Tire Farmer Carry",
+"Tire Overhead Toss",
+"BR Alternating waves",
+"BR Up & Down waves",
+"BR Side to Side waves",
+"BR In & Out waves",
+"BR Slam",
+"BR Jump Slam",
+"BR Side Slam",
+"BR Inside Circle",
+"BR Outside Circle",
+"BR Hold Squat Wave",
+"BR Active Squat waves",
+"BR Alternating Side Lunge waves",
+"BR Alternating Reverse Lunge waves",
+"BR Jumping Alternating Lunge",
+"BR Grappler Toss",
+"BR Drum Solo waves",
+"BR Ultimate Warrior Rope Shake",
+"BR Shuffle waves",
+"BR Hop waves",
+"BR Upper Cut",
+"BR Split Snatch waves",
+"BR Figure 8 waves",
+"BR Jumping Jack waves",
+"BR Split Jack waves",
+"BR Diagonal Chop",
+"BR Plank waves",
+"BR Side Plank Slam",
+"BR Russian Twist waves",
+"BR Lateral Hop+Slam",
+"BR Seated waves",
+"BR Kneeling waves",
+"BR Kneeling to Standing waves",
+"BR Standing Trunk Rotation",
+"BR Alternating Standing Press",
+"BR Kneeling Press",
+"BR Front Raise",
+"BR Rear Delt Raise",
+"BR Foot Fire Alternating waves",
+"BR Band Resistance Alternating waves"
+
                 };
 
             string[] Metcan = new string[] {
-  "Run",
-  "Air run",
-  "Incline run",
-  "Single under",
-  "Double under",
-  "Row",
-  "Biking",
-  "Skiing",
-  "Stair climber machine",
-  "Elliptical",
-  "Jumping jack"
+"Run",
+"Air run",
+"Treadmill",
+"Backward Run",
+"Incline Run",
+"Sprint",
+"Shuttle Sprint",
+"Bike",
+"BikeErg",
+"AirBike",
+"Airdyne",
+"Echo Bike",
+"Row",
+"SkiErg",
+"Stair Climber Machine",
+"Elliptical",
+"Swim",
+"Single Under",
+"Double Under",
+"Triple Under",
+"Jump",
+"But Kick",
+"High Knees",
+"Hop Heel Click",
+"Toe Tap Hop",
+"Jumping Jack",
+"Jumping Ts",
+"Split Jack",
+"Press Jack",
+"Twist Jack",
+"Seal Jack",
+"Crossover Jack",
+"Star Jump",
+"Tuck Jump",
+"Standing Knees to Elbows",
+"Squat Step up"
+
             };
 
             string[] Shoulder = new string[] {
-    "پرس سرشانه",
-    "پرس سرشانه از پشت",
-    " پرس سرشانه دمبل",
-    " پرس سرشانه دمبل نشسته",
-    "پرس سرشانه چرخشی",
-    "پرس سرشانه چرخشی نشسته",
-    "پرس سرشانه نشسته",
-    "پرس سرشانه ازپشت نشسته",
-    "نشر از جلو متناوب",
-    "نشر از جلو غیر متناوب",
-    "نشر از جلو سیم کش",
-    "نشر از جانب",
-    "نشر از جانب زاویه جلو",
-    "نشر از جانب زاویه پشت",
-    "نشر از جانب چکشی",
-    "نشر از جلو هالتر",
-    "نشر از جلو غیر متناوب",
-    "نشر خم دمبل ایستاده",
-    "نشر خم دمبل نشسته",
-    "نشر خم سیم کش",
-    "نشر از جلو هالتر خوابیده",
-    "فیس پول",
-    "نشر خم روی میز شیبدار",
+"Shoulder Press Machine",
+"Standing Shoulder Press",
+"Seated Shoulder Press",
+"Behind the Neck Press",
+"Seated Behind the Neck  Press",
+"Dumbbell Shoulder Press",
+"Seated Dumbbell Shoulder Press",
+"Arnold Press",
+"Seated Arnold Press",
+"Machine Reverse Fly",
+"Barbell Front Raise",
+"Barbell Rear Delt Raise (Prone)",
+"Dumbbell Front Raise",
+"Alternating Dumbbell Front Raise",
+"Cable Front Raise",
+"Single arm Cable Front Raise",
+"Lateral Raise Machine",
+"Lateral Raise",
+"Lateral Raise (Front Angle)",
+"Lateral Raise (Back Angle)",
+"Hammer Grip Lateral Raise",
+"Cable Lateral Raise",
+"Single arm Cable Lateral Raise (Front Angle)",
+"Single arm Cable Lateral Raise (Back Angle)",
+"Cable Rear Delt Fly",
+"Cable Internal Rotation",
+"Cable External Rotation",
+"Standing Bent over Dumbbell Lateral Raise",
+"Seated Bent over Dumbbell Lateral Raise",
+"Incline Bent over Lateral Raise",
+"Bent over Cable Lateral Raise",
+"Single arm Cable Reverse Fly",
+"Trap raise",
+"Face pull",
+"Barbell Shrug",
+"Barbell Shrug (Front Angle)",
+"Barbell Shrug (Back Angle)",
+"Dumbbell Shrug",
+"Dumbbell Shrug (Front Angle)",
+"Dumbbell Shrug (Back Angle)",
+"Cable Shrug",
+"Barbell High Pull",
+"Wide Grip Barbell High Pull",
+"Close Grip Barbell High Pull",
+"Dumbbell High Pull",
+"Cable High Pull"
             };
 
             string[] Chest = new string[] {
-    "پرس سینه هالتر",
-    "پرس سینه هالتر دست جمع",
-    "پرس سینه هالتر دست باز",
-    "پرس سینه هالتر درازکش",
-    "پرس سینه دمبل",
-    "پرس سینه دمبل درازکش",
-    "قفسه سینه دمبل",
-    "پرس بالا سینه هالتر",
-    "پرس بالا سینه هالتر دست باز",
-    "پرس بالا سینه دمبل",
-    "قفسه بالا سینه دمبل",
-    "پرس زیر سینه هالتر",
-    "پرس زیر سینه دمبل",
-    "قفسه زیر سینه دمبل",
-    "فلای دستگاه",
-    "پول اور هالتر",
-    "پول اور هالتر دست جمع",
-    "پول اور هالتر ایستاده",
-    "پول اور دمبل",
-    "پول اور دمبل ایستاده",
+"Chest Press Machine",
+"Barbell Bench Press",
+"Close Grip Bench Press",
+"Wide Grip Bench Press",
+"Floor Press",
+"Dumbbell Bench Press",
+"Neutral Grip Dumbbell Bench Press",
+"Lying Fly",
+"Dumbbell Floor Press",
+"Neutral Grip Dumbbell Floor Press",
+"Floor Lying Fly",
+"Cable Crossover",
+"Incline Chest Press Machine",
+"Incline Barbell Bench Press",
+"Wide Grip Incline Bench Press",
+"Incline Dumbbell Bench Press",
+"Neutral Grip Incline Dumbbell Bench Press",
+"Incline Cable Chest Press",
+"Incline Fly",
+"Incline Cable Fly",
+"Fly Machine",
+"Decline Barbell Bench Press",
+"Wide Grip Decline Bench Press",
+"Decline Dumbbell Bench Press",
+"Neutral Grip Decline Dumbbell Bench Press",
+"Decline Cable Chest Press",
+"Decline Fly",
+"Decline Cable Fly",
+"Barbell Pull over",
+"Close Grip Barbell Pull over",
+"Dumbbell Pull over",
+"Chest Dip",
+
             };
 
             string[] Back = new string[] {
-    "لت از جلو",
-    "لت دست معکوس",
-    "لت از پشت",
-    "زیر بغل قایقی",
-    "زیر بغل تک دمبل",
-    "زیر بغل هالتر خم",
-    "Barbell Row",
-    "زیر بغل جفت دمبل",
-    "تی بار هالتر",
+"Seated Pull down Machine",
+"Lat Pull Down",
+"Behind the Neck Lat Pull Down",
+"Close Grip Lat Pull Down",
+"Wide Grip Lat Pull Down",
+"Reverse Grip Lat Pull Down",
+"Straight arm Lat Pull Down",
+"Rope Straight arm Pull Down",
+"Cable Row",
+"Wide Grip Cable Row",
+"Underhand Grip Cable Row",
+"Barbell Row",
+"Incline Bench Barbell Row",
+"Reverse Grip Incline Bench Barbell Row",
+"Dumbbell Row",
+"Incline Bench Dumbbell Row",
+"Single arm Dumbbell Row",
+"T Bar Machine",
+"T Bar Row",
+"H Machine Row",
+"Single arm H Machine Row",
+"Good Morning",
+"Pull up",
+"Wide Grip Pull up"
+
+            };
+
+            string[] MiddleBody = new string[]
+            {
+"Crunch Machine",
+"Sit up",
+"Crunch",
+"Alternating Crunch",
+"MB Sit up",
+"Heel Touch",
+"Russian Twist",
+"MB Russian Twist",
+"BR Russian Twist Wave",
+"Lateral Ball Toss",
+"Butterfly Sit up",
+"Bicycle Crunch",
+"Standing Knees to Elbows",
+"Flutter Kick",
+"Scissor Kick",
+"Decline Sit up",
+"Hollow Hold",
+"Hollow Rock",
+"V Sit",
+"V Up",
+"Leg Lever",
+"Candlestick",
+"Leg lever to Ball",
+"Vertical Leg Raise",
+"Vertical Knees Raise",
+"Hanging Knees Raise",
+"Hanging Leg Raise",
+"L sit Hold",
+"L Sit Leg Lift",
+"Hanging L Sit",
+"Windshield Wipers Bar",
+"Evil Wheel",
+"Sit up to Stand up",
+"MB Sit up to Stand up",
+"RB Core Twist",
+"RB Pallof Hold",
+"Plank",
+"PPT Plank",
+"Wide Plank",
+"Extended Plank",
+"Side to Side Plank",
+"Plank With Opposite Reach",
+"Side Plank",
+"Side Plank Knee Tuck",
+"Reverse Plank",
+"Up Down Plank",
+"Plank Press",
+"Hip Bridge",
+"Side Hip Bridge",
+"RB Hip Bridge",
+"RB Single Leg Hip Bridge",
+"Mountain Climber",
+"RB Good Morning",
+"Superman",
+"Hyperextension"
+
             };
 
             string[] Arm = new string[] {
-    "جلو بازو هالتر ایستاده",
-    "جلو بازو هالتر ایستاده دست جمع",
-    "جلو بازو هالتر نشسته",
-    "جلو بازو هالتر نشسته دست جمع",
-    "جلو بازو هالتر نشسته دست جمع تمرکزی",
-    "جلو بازو هالتر خوابیده",
-    "جلو بازو هالتر خوابیده دست جمع",
-    "جلو بازو هالتر میز شیبدار",
-    "جلو بازو هالتر دست جمع میز شیبدار",
-    "جلو بازو دمبل ایستاده",
-    "جلو بازو دمبل جفت چکشی",
-    "جلو بازو دمبل نشسته تناوبی",
-    "جلو بازو تک دمبل نشسته",
-    "جلو بازو دمبل میز شیبدار",
-    "جلو بازو دمبل تناوبی میز شیبدار",
-    "جلو بازو سیم کش",
-    "پشت بازو هالتر پرسی",
-    "پشت بازو هالتر ایستاده",
-    "پشت بازو هالتر نشسته",
-    "پشت بازو هالتر خوابیده",
-    "پشت بازو هالتر خوابیده دست جمع",
-    "BarbellTricepsLying(kickback)",
-    "پشت بازو تک دمبل ایستاده",
-    "پشت بازو دمبل خوابیده",
-    "پشت بازو سیم کش",
-    "پشت بازو جفت دمبل نشسته",
-    " کیک بک جفت دمبل نشسته",
-    "ساعد هالتر از پشت ایستاده",
-    "ساعد هالتر نشسته",
-    "ساعد هالتر نشسته دست معکوس",
-    "ساعد دمبل نشسته",
-    "ساعد دمبل نشسته دست معکوس",
+"Biceps Curl Machine",
+"Single arm Biceps Curl Machine",
+"Standing Barbell Curl",
+"Close Grip Standing Barbell Curl",
+"Wide Grip Standing Barbell Curl",
+"Seated Barbell Curl",
+"Close Grip Seated Barbell Curl",
+"Close Grip Seated Concentration Barbell Curl",
+"Incline Barbell Curl",
+"Close Grip Incline Barbell Curl",
+"Prone Barbell Curl",
+"Close Grip Prone BarbellCurl",
+"Standing EZ Bar curl",
+"EZ Bar Preacher Curl",
+"Standing Dumbbell Curl",
+"Standing Alternating Dumbbell Curl",
+"Standing Hammer Curl",
+"Standing Alternating Hammer Curl",
+"Seated Alternating Dumbbell Curl",
+"Concentration Dumbbell Curl",
+"Zottman Curl",
+"Incline Dumbbell Curl",
+"Alternaing Incline Dumbbell Curl",
+"Dumbbell Preacher Curl",
+"Cable Biceps Curl",
+"Close Grip Cable Biceps Curl",
+"Single Arm Cable Curl",
+"Seated Cable Curl",
+"Standing High Pulley Cable Curl",
+"Standing Single arm High Pulley Cable Curl",
+"Triceps Press Machine",
+"Barbell Triceps Press",
+"Standing Barbell Triceps Press",
+"Seated Barbell Triceps Press",
+"Prone Barbell Triceps Press",
+"Close Grip Prone Barbell Triceps Press",
+"Barbell Triceps Lying (KickBack)",
+"Seated single Dumbbell Triceps Extension",
+"Standing Overhead Dumbbell Triceps",
+"Seated Single Dumbbell Triceps Extension",
+"Seated Dumbbell Triceps Extension",
+"Double ArmTriceps KickBack",
+"Seated Double Arm Triceps KickBack",
+"Prone Dumbbell Triceps Press",
+"Push Down",
+"Single arm Cable Triceps Extension",
+"Reverse Grip Triceps Extension",
+"Rope Triceps Extension",
+"Lying Triceps Extension",
+"Bench Dip",
+"Reverse Grip Barbell Curl",
+"Standing Dumbbell Reverse Curl",
+"Standing Wrist Curl Behind Back",
+"Seated Barbell Wrist Curl",
+"Reverse Grip Seated Barbell Wrist Curl",
+"Seated Dumbbell Wrist Curl",
+"Reverse Grip Seated Dumbbell Wrist Curl",
+
             };
 
             string[] Leg = new string[] {
-    "اسکات از پشت",
-    "اسکات از پشت پا باز",
-    "نیم اسکات از پشت",
-    "هاگ اسکات هالتر",
-    "اسکات بلغاری",
-    "اسکات بلغاری با دمبل",
-    "استپ آپ با دمبل",
-    "هیپ تراست با هالتر",
-    "لانچ با هالتر",
-    "لانچ با هالتر همراه با قدم زدن",
-    "جلو پا ماشین",
-    "هاگ اسکات ماشین",
-    "پرس پا ماشین",
-    "پشت پا خوابیده ماشین",
-    "ددلیفت",
-    "ددلیفت رومانیایی",
-    "سومو ددلیفت",
-    "ساق پا دمبل ایستاده",
-    "ساق پا هالتر نشسته",
-    "ساق پا جفت دمبل نشسته",
+"Seated Leg Extension",
+"Seated Single Leg Extension",
+"Back Squat",
+"Hack Squat",
+"Barbell Hack Squat",
+"Bulgarian Split Squat",
+"Dumbbell Squat",
+"Pile Squat",
+"Dumbbell Bulgarian Split Squat",
+"Barbell Lunge",
+"Walking Barbell Lunge",
+"Dumbbell Lunge",
+"Walking Dumbbell Lunge",
+"Side Lunge",
+"Leg Press Machine",
+"Lying Leg Curl Machine",
+"Single Leg Curl Machine",
+"Seated Leg Curl Machine",
+"Dumbbell Hamstring Curl on Bench",
+"Dumbbell Hamstring Curl on Floor",
+"Adductor Machine",
+"Abductor Machine",
+"Deadlift",
+"Romanian Deadlift",
+"Sumo Deadlift",
+"Glute KickBack Machine",
+"Hip Thrust",
+"Barbell Step up",
+"Dumbbell Step up",
+"Standing Calf Raise Machine",
+"Seated Calf Raise Machine",
+"Rocking Standing Calf Raise",
+"Seated Barbell Calf Raise",
+"Standing Dumbbell Calf Raise",
+"Seated Dumbbell Calf Raise",
+"Calf Raise Machine",
+"Hack Calf Raise",
+"Calf Raise on Leg Press Machine"
             };
 
             string[] Upperbody = new string[] {
-    "TRX atomic pike",
-    "TRX burpee",
-    "TRXbodysaw",
-    "TRX pike",
-    "TRX plank",
-    "TRX side plank",
-    "TRX spiderman push-up",
-    "TRX side plank (single leg)",
-    "TRX side plank (single leg to knee tuck)",
-    "TRX overhead back extension",
-    "TRX inverted row",
-    "TRX resisted torso rotation",
-    "TRX row series",
-    "TRX chest press",
-    "TRX clock press",
-    "TRX low row to chest press",
-    "TRX pull-up",
-    "TRX sprinter start",
-    "TRX half kneeling roll out",
-    "TRX deltoid fly to T fly",
-    "TRX triceps press",
-    "TRX power pull",
-    "TRX biceps curp",
-    "TRX mountain climber",
-    "TRX incling plank",
-    "TRX incline press",
-    "TRX plank press",
-    "TRX chest fly",
-    "TRX hinge",
-    "TRX bic FPS curl (single arm)",
-    "TRX pull press",
-    "TRX hip throw",
-    "TRX hinge (single arm)",
-    "TRX split fly",
-    "TRX inverted row",
-    "TRX wall sides (stand facing)",
-    "TRX hinge (wide stance)",
-    "TRX long torso stretch",
-    "TRX half kneeling roll out",
-    "TRX cossack",
-    "TRX hinge (single arm) to push-up",
-    "TRX low row to biceps curl to Y fly",
+"TRX Chest Press",
+"TRX Clock Press",
+"TRX Chest Fly",
+"TRX Split Fly",
+"TRX T Fly",
+"TRX Y Fly",
+"TRX Y Fly to T Fly",
+"TRX Power Pull",
+"TRX Triceps Press",
+"TRX Biceps Curl",
+"TRX Bic FPS Curl (Single Arm)",
+"TRX Plank",
+"TRX Body Saw",
+"TRX Side Plank",
+"TRX Side Plank (Single Leg)",
+"TRX Side Plank (Single Leg to Knee Tuck)",
+"TRX Up Down Plank",
+"TRX Plank Press",
+"TRX Push up",
+"TRX Spiderman Push-up",
+"TRX Pike",
+"TRX Atomic Pike",
+"TRX Mountain Climber",
+"TRX Burpee",
+"TRX Row",
+"TRX Inverted Row",
+"TRX Single arm Inverted Row",
+"TRX Torso Rotation",
+"TRX Hip Throw",
+"TRX Pull up",
+"TRX Overhead Back Extension",
+"TRX Long Torso Stretch",
+
             };
 
             string[] Lowerbody = new string[] {
-    "TRX hamstring burner",
-    "TRXhipabduction",
-    "TRXhippress",
-    "TRX hip press (single leg)",
-    "TRX hamstringcurl",
-    "TRX lunge",
-    "TRX lunge (1 hand down)",
-    "TRX squat",
-    "TRX side lunge",
-    "TRX squat row",
-    "TRX squat row (single arm)",
-    "TRX squat Y fly",
-    "TRX squat (single leg)",
-    "TRX abduction lunge",
-    "TRX overhead squat",
-    "TRX sprinter start",
-    "TRX squat (single leg) to closing balance lunge",
-    "TRX forward lunge with hip flexor stretch",
-    "TRX split squat (W/ M deltoid fly)",
-    "TRX split squat (W/ T deltoid fly)",
-    "TRX split squat (W/ Y deltoid fly)",
-    "TRX hip hinge (single leg)",
+"TRX Hip Abduction",
+"TRX Hip Bridge",
+"TRX Hamstring Curl",
+"TRX Hamstring Runner",
+"TRX Squat",
+"TRX Squat Jump",
+"TRX Squat Y Fly",
+"TRX Overhead Squat",
+"TRX Single Leg Squat",
+"TRX Squat Row (Single arm/leg)",
+"TRX Split Squat (W/Y Deltoid Fly)",
+"TRX Split Squat (W/T Deltoid Fly)",
+"TRX Split Squat (W/M Deltoid Fly)",
+"TRX Hip Hinge (Single Leg)",
+"TRX Cossack Stretch",
+"TRX Lunge",
+"TRX Lunge (One Hand Down)",
+"TRX Side Lunge",
+"TRX Abducted Lunge",
+"TRX Single Leg Squat to Crossing Balance Lunge",
+"TRX Forward Lunge with Hip Flexor Stretch",
+"TRX Sprinter Start"
+            };
+            string[] UpperbodyKeshResistance = new string[] {
+"RB Push up",
+"RB Chest Press",
+"RB Chest Fly",
+"RB Chest Crossover",
+"RB Butterfly",
+"RB Shoulder Press",
+"RB Front Raise",
+"RB Alternating Front Raise",
+"RB Lateral Raise",
+"RB Alternating Lateral Raise",
+"RB Hammer Grip Lateral Raise",
+"RB Reverse Fly",
+"RB Lower Reverse Fly",
+"RB Upright Raise",
+"RB Shrug",
+"RB Bent Deltoid",
+"RB Archer",
+"RB Upper Back Row",
+"RB Overhead Pull Down",
+"RB Seated Row",
+"RB Biceps Curl",
+"RB Alternating Biceps Curl",
+"RB Hammer Grip Curl",
+"RB Alternating Hammer Grip Curl",
+"RB Concentration Curl",
+"RB Triceps Overhead Press",
+"RB Triceps Side Press",
+"RB Triceps Pull",
+"RB Triceps Kickback",
+"RB Good Morning",
+"RB Core Twist",
+"RB Pallof Hold"
+            };
+
+            string[] LowerbodyKeshResistance = new string[] {
+"RB Squat",
+"RB Front Squat",
+"RB Lunge",
+"RB Front Lunge",
+"RB Outer Thigh Raise",
+"RB Donkey Kick",
+"RB Leg KickBack",
+"RB Leg Press",
+"RB Adduction",
+"RB Abduction",
+"RB Hip Bridge",
+"RB Single Leg Hip Bridge",
+"RB Hamstring Curl"
             };
 
             comboBox3.Enabled = true;
@@ -520,10 +1123,10 @@ namespace Fitness_Managment
                 case "میله و دارحلقه":
                     comboBox3.Items.AddRange(BarAndring);
                     break;
-                case "با وزن بدن":
+                case "وزن بدن":
                     comboBox3.Items.AddRange(BodyWeight);
                     break;
-                case "با تجهیزات":
+                case "تجهیزات":
                     comboBox3.Items.AddRange(Equipmentbeased);
                     break;
                 case "کاردیو":
@@ -538,6 +1141,9 @@ namespace Fitness_Managment
                 case "پشت":
                     comboBox3.Items.AddRange(Back);
                     break;
+                case "میان تنه":
+                    comboBox3.Items.AddRange(MiddleBody);
+                    break;
                 case "بازو و ساعد":
                     comboBox3.Items.AddRange(Arm);
                     break;
@@ -548,13 +1154,13 @@ namespace Fitness_Managment
                     if (comboBox1.SelectedItem == "تی آر ایکس")
                         comboBox3.Items.AddRange(Upperbody);
                     else
-                        comboBox3.Items.AddRange(new string[] { });
+                        comboBox3.Items.AddRange(UpperbodyKeshResistance);
                     break;
                 case "پایین تنه":
                     if (comboBox1.SelectedItem == "تی آر ایکس")
                         comboBox3.Items.AddRange(Lowerbody);
                     else
-                        comboBox3.Items.AddRange(new string[] { });
+                        comboBox3.Items.AddRange(LowerbodyKeshResistance);
                     break;
 
                 default:
@@ -643,6 +1249,7 @@ namespace Fitness_Managment
             button5.Enabled = false;
         }
 
+        int publicMTID = 0;
         private async void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             var client = new HttpClient();
@@ -652,19 +1259,23 @@ namespace Fitness_Managment
             //Console.WriteLine(content);
             label7.Visible = false;
             label6.Visible = false;
+            button31.Visible = false;
 
-            if (content == "false")
+            if (content == "0")
             {
                 label7.Visible = true;
                 groupBox1.Enabled = true;
                 groupBox2.Enabled = true;
+                button31.Visible = false;
+
             }
             else
             {
                 label6.Visible = true;
                 groupBox1.Enabled = false;
                 groupBox2.Enabled = false;
-
+                button31.Visible = true;
+                publicMTID = Int32.Parse(content);
             }
         }
 
@@ -676,6 +1287,8 @@ namespace Fitness_Managment
 
                 using (var httpClient = new HttpClient())
                 {
+                    httpClient.Timeout = TimeSpan.FromMinutes(30);
+
                     using (var form = new MultipartFormDataContent())
                     {
 
@@ -825,7 +1438,9 @@ namespace Fitness_Managment
                         fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
                         form.Add(fileContent, "File", ".gif");
 
-                        HttpResponseMessage response = await httpClient.PostAsync(BaseAddress + "fitness/VOD/PostMovement", form);
+                        Uri myUri = new Uri(BaseAddress + "fitness/VOD/PostMovement", UriKind.Absolute);
+
+                        HttpResponseMessage response = await httpClient.PostAsync(myUri, form);
 
                         string ResStr = await response.Content.ReadAsStringAsync();
                         Console.WriteLine(ResStr);
@@ -915,7 +1530,11 @@ namespace Fitness_Managment
                         Zarib = float.Parse(textBoxTadil.Text),
                         PayeshMard = float.Parse(textBoxPayeshMard.Text),
                         PayeshZan = float.Parse(textBoxPayeshZan.Text),
-                        ZaribSakhti = float.Parse(textBoxZaribSakhti.Text)
+                        ZaribSakhti = float.Parse(textBoxZaribSakhti.Text),
+                        ZaribTaAdol = float.Parse(textBox9.Text),
+                        ShowStatus = (string)comboBox7.SelectedItem,
+                        vaznNormalZhimnastik = float.Parse(textBox10.Text),
+                        WhichType = listBoxType.Items.Cast<String>().FirstOrDefault(),
                     };
                 }
                 catch (Exception)
@@ -950,27 +1569,29 @@ namespace Fitness_Managment
                     return;
                 }
 
+                MessageBox.Show("تبریک!!! قسمت اول آپلود انجام شد، حالا ادامه میدیم");
 
+                int iMehr = 1;
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
+
+                    Com.MovementTrainingDetail movementTrainingDetail = new Com.MovementTrainingDetail()
                     {
-                        Com.MovementTrainingDetail movementTrainingDetail = new Com.MovementTrainingDetail()
-                        {
-                            ContextDetail = row.Cells[0].Value.ToString(),
-                            ImgName = "",
-                            MTID = MTIDnew
-                        };
-                        string bb = await PostToServerMovementDetail(row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), movementTrainingDetail);
+                        ContextDetail = row.Cells[0].Value.ToString(),
+                        ImgName = "",
+                        MTID = MTIDnew
+                    };
+                    string bb = await PostToServerMovementDetail(row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), movementTrainingDetail);
 
-                        int MTDIDnew = Int32.Parse(bb);
+                    int MTDIDnew = Int32.Parse(bb);
 
-                        if (MTDIDnew < 0)
-                        {
-                            MessageBox.Show("مشکلی در ارسال جزییات حرکت وجود دارد ولی  اطلاعات حرکت در دیتابیس ذخیره شده است");
-                            return;
-                        }
-
+                    if (MTDIDnew < 0)
+                    {
+                        MessageBox.Show(" حرکت شماره  "+ iMehr + "دچار مشکل شده ولی ادامه میدیم تا ببینیم چی میشه");
+                        // MessageBox.Show("مشکلی در ارسال جزییات حرکت وجود دارد ولی  اطلاعات حرکت در دیتابیس ذخیره شده است");
+                        // return;
                     }
+                    iMehr++;
                 }
 
                 MessageBox.Show("آپلود به درستی انجام شد.");
@@ -980,6 +1601,7 @@ namespace Fitness_Managment
                 textBox1.Text = "";
                 label7.Visible = false;
                 label6.Visible = false;
+                button31.Visible = false;
 
                 listBoxEnvoritment.Items.Clear();
                 listBoxEquipment.Items.Clear();
@@ -1174,7 +1796,7 @@ namespace Fitness_Managment
                         try
                         {
                             System.Net.WebRequest request = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
+                                BaseAddress + "FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
                             System.Net.WebResponse response = request.GetResponse();
                             Stream responseStream = response.GetResponseStream();
                             Bitmap bitmapMov = new Bitmap(responseStream);
@@ -1196,13 +1818,13 @@ namespace Fitness_Managment
                         try
                         {
                             System.Net.WebRequest request = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
+                               BaseAddress + "/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
                             System.Net.WebResponse response = request.GetResponse();
                             Stream responseStream = response.GetResponseStream();
                             Bitmap bitmapMov = new Bitmap(responseStream);
 
                             System.Net.WebRequest request2 = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[1]);
+                               BaseAddress + "/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[1]);
                             System.Net.WebResponse response2 = request2.GetResponse();
                             Stream responseStream2 = response2.GetResponseStream();
                             Bitmap bitmapMov2 = new Bitmap(responseStream2);
@@ -1228,19 +1850,19 @@ namespace Fitness_Managment
                         try
                         {
                             System.Net.WebRequest request = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
+                                BaseAddress + "FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[0]);
                             System.Net.WebResponse response = request.GetResponse();
                             Stream responseStream = response.GetResponseStream();
                             Bitmap bitmapMov = new Bitmap(responseStream);
 
                             System.Net.WebRequest request2 = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[1]);
+                               BaseAddress + "FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[1]);
                             System.Net.WebResponse response2 = request2.GetResponse();
                             Stream responseStream2 = response2.GetResponseStream();
                             Bitmap bitmapMov2 = new Bitmap(responseStream2);
 
                             System.Net.WebRequest request3 = System.Net.WebRequest.Create(
-                                "https://www.hasma.ir/FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[2]);
+                               BaseAddress + "FitnessResource/Movement/" + itemMovDet.MTID.ToString() + "/" + itemMovDet.MTDID.ToString() + "/" + ImgNameSplited[2]);
                             System.Net.WebResponse response3 = request3.GetResponse();
                             Stream responseStream3 = response3.GetResponseStream();
                             Bitmap bitmapMov3 = new Bitmap(responseStream3);
@@ -1768,6 +2390,77 @@ namespace Fitness_Managment
             {
                 Console.WriteLine(eee.Message);
             }
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            if (this.checkedListBox10.CheckedItems.Count > 0)
+            {
+                this.listBoxType.Items.Clear();
+                foreach (string item in this.checkedListBox10.CheckedItems)
+                {
+                    this.listBoxType.Items.Add(item.ToString());
+                }
+                for (int i = 0; i < this.checkedListBox10.Items.Count; i++)
+                {
+                    this.checkedListBox10.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBoxUpperBody.Items.Count; i++)
+            {
+                this.checkedListBoxUpperBody.SetItemChecked(i, true);
+            }
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox1.Items.Count; i++)
+            {
+                this.checkedListBox1.SetItemChecked(i, true);
+            }
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox2.Items.Count; i++)
+            {
+                this.checkedListBox2.SetItemChecked(i, true);
+            }
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox3.Items.Count; i++)
+            {
+                this.checkedListBox3.SetItemChecked(i, true);
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox4.Items.Count; i++)
+            {
+                this.checkedListBox4.SetItemChecked(i, true);
+            }
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox5.Items.Count; i++)
+            {
+                this.checkedListBox5.SetItemChecked(i, true);
+            }
+        }
+
+        private async void button31_Click(object sender, EventArgs e)
+        {
+            var client = new HttpClient();
+            var content = await client.GetStringAsync(BaseAddress + "fitness/VOD/RemoveMovement?MTID=" + publicMTID);
+            Console.WriteLine(content);
         }
     }
 

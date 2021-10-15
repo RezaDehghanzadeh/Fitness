@@ -16,7 +16,8 @@ namespace Fitness_Managment
     public partial class FormDailyVOD : Form
     {
        // string BaseAddress = "http://localhost:56271/";
-        string BaseAddress = "https://www.hasma.ir/";
+        //string BaseAddress = "https://www.hasma.ir/";
+        string BaseAddress = "http://193.105.234.83/";
 
         public FormDailyVOD()
         {

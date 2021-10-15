@@ -8,6 +8,53 @@ namespace BLL
 {
     public class VOD
     {
+
+
+
+        public static List<Com.VOD> GetVODByFilter(int XX)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+
+                    List<Com.VOD> ResList = ent.VODs.Where(a => a.VODModifyTypes.Any(c => c.TID == XX)).ToList();
+                    ent.SaveChanges();
+
+                    return ResList;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.AddDailyVOD, "", -100, e.Message); }).Start();
+                return null;
+            }
+        }
+        public static List<Com.VOD> GetVODByFilter(Com.VODFilterData VODFilterData)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    List<Com.VOD> ResList = ent.VODs
+                        .Where(a =>
+                        a.Pattern == VODFilterData.Pattern && a.MovmentCount == VODFilterData.MovmentCount && a.TimeDuration == VODFilterData.TimeDuration &&
+                        a.Modality == VODFilterData.Modality && a.Place == VODFilterData.Place && a.Body == VODFilterData.Body &&
+                        a.Energy == VODFilterData.Energy && a.PublicSkill == VODFilterData.PublicSkill &&
+                        a.VODEquipments.Any(c => VODFilterData.Equipments.Contains(c.EID))
+                        //&& !a.VODMovments.Any(c => VODFilterData..Contains(c.EID))
+                        ).ToList();
+
+                    return ResList;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.GetVODByFilter, "", -100, e.Message); }).Start();
+                return null;
+            }
+        }
+
         public static int AddDailyVOD(Com.DailyVOD mDailyVOD)
         {
             try
@@ -22,14 +69,17 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddDailyVOD, "", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddDailyVOD, "", -100, e.Message);
+                }).Start();
                 return -100;
             }
         }
 
 
 
-        public static int AddVOD(Com.VOD mVOD)
+        public static int AddVOD(Com.VOD mVOD, List<int> ListMV, List<int> ListEQ)
         {
             try
             {
@@ -38,14 +88,105 @@ namespace BLL
                     ent.VODs.Add(mVOD);
                     ent.SaveChanges();
 
+                    List<Com.VODEquipment> vodEquipment = new List<Com.VODEquipment>();
+                    List<Com.VODMovment> vodMovment = new List<Com.VODMovment>();
+
+                    foreach (var item in ListEQ)
+                        vodEquipment.Add(new Com.VODEquipment() { VID = mVOD.VID, EID = item });
+
+                    foreach (var item in ListMV)
+                        vodMovment.Add(new Com.VODMovment() { VID = mVOD.VID, MID = item });
+
+                    ent.VODEquipments.AddRange(vodEquipment);
+                    ent.VODMovments.AddRange(vodMovment);
+
+                    ent.SaveChanges();
+
                     return mVOD.VID;
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddVOD, "", -100, e.Message);
-                Log.DoLog(Com.Common.Action.AddVOD, "", -100, e.InnerException.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddVOD, "", -100, e.Message);
+                }).Start();
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddVOD, "Inner", -100, e.InnerException.Message);
+                }).Start();
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddVOD, "Inner2", -100, e.InnerException.InnerException.Message);
+                }).Start();
                 return -100;
+            }
+        }
+
+        public static int AddVODEquipment(Com.VODEquipment vodEquipment)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+
+                    ent.VODEquipments.Add(vodEquipment);
+                    ent.SaveChanges();
+
+                    return vodEquipment.VEID;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddVODEquipment, "", -100, e.Message);
+                }).Start();
+
+                return -100;
+            }
+        }
+        public static int AddVODMovment(Com.VODMovment vodMovment)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+
+                    ent.VODMovments.Add(vodMovment);
+                    ent.SaveChanges();
+
+                    return vodMovment.VMID;
+                }
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.AddVODMovment, "", -100, e.Message);
+                }).Start();
+
+                return -100;
+            }
+        }
+
+
+        public static bool RemoveMovementTraining(Com.MovementTraining mMovementTraining)
+        {
+            try
+            {
+                using (var ent = DB.Entity)
+                {
+                    ent.MovementTrainings.Attach(mMovementTraining);
+                    ent.MovementTrainings.Remove(mMovementTraining);
+                    ent.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.RemoveMovementTraining, "", -100, e.Message); }).Start();
+                return false;
             }
         }
 
@@ -58,12 +199,16 @@ namespace BLL
                     ent.MovementTrainings.Add(mMovementTraining);
                     ent.SaveChanges();
 
+                    //  new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.AddMovementTraining, " ", mMovementTraining.MTID, ""); }).Start();
+
                     return mMovementTraining.MTID;
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddMovementTraining, "", -100, e.Message);
+                //  new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.AddMovementTraining, " ",-100, "ERROR"); }).Start();
+
+                new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.AddMovementTraining, " ", -100, e.Message); }).Start();
                 return -100;
             }
         }
@@ -76,12 +221,15 @@ namespace BLL
                     ent.MovementTrainingDetails.Add(mMovementTrainingDetail);
                     ent.SaveChanges();
 
+                    new System.Threading.Thread(delegate () { Log.DoLog(Com.Common.Action.AddMovementTrainingDetail, " ", mMovementTrainingDetail.MTDID, "OK"); }).Start();
+
                     return mMovementTrainingDetail.MTDID;
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.AddMovementTrainingDetail, "", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {Log.DoLog(Com.Common.Action.AddMovementTrainingDetail, " ", -100, e.Message);}).Start();
                 return -100;
             }
         }
@@ -91,12 +239,15 @@ namespace BLL
             {
                 using (var ent = DB.Entity)
                 {
-                    return ent.MovementTrainings.Where(M => M.Part == Part && M.SubPart == SubPart && M.Movement == MoveName).SingleOrDefault();
+                    return ent.MovementTrainings.Where(M => M.Part == Part && M.SubPart == SubPart && M.Movement == MoveName).FirstOrDefault();
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetMovementTraining, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetMovementTraining, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -111,7 +262,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetMovementTraining, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetMovementTraining, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -126,7 +280,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetVOD, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetVOD, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -136,7 +293,8 @@ namespace BLL
             {
                 using (var ent = DB.Entity)
                 {
-                    return ent.VODs.Where(M => M.IsPreMade == true).Select( M =>new Com.MiniVOD() { 
+                    return ent.VODs.Where(M => M.IsPreMade == true).Select(M => new Com.MiniVOD()
+                    {
                         Info = M.Info,
                         Name = M.Name,
                         VID = M.VID,
@@ -145,7 +303,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllPreMadeVOD, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllPreMadeVOD, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -155,12 +316,15 @@ namespace BLL
             {
                 using (var ent = DB.Entity)
                 {
-                    return ent.VODs.Where(M => M.Name == VODName).SingleOrDefault();
+                    return ent.VODs.Where(M => M.Name == VODName).FirstOrDefault();
                 }
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetVODByName, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetVODByName, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -177,7 +341,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllDailyVODs, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllDailyVODs, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -193,7 +360,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetDailyVODs, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetDailyVODs, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -208,7 +378,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllMovementTraining, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllMovementTraining, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -224,7 +397,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllMovementTrainingDetailByID, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllMovementTrainingDetailByID, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }
@@ -245,7 +421,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateMovementTraining, mMovementTraining.MTID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateMovementTraining, mMovementTraining.MTID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -265,7 +444,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateVOD, mVOD.VID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateVOD, mVOD.VID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -276,7 +458,7 @@ namespace BLL
             {
                 using (var ent = DB.Entity)
                 {
-                    Com.VOD mVOD = new Com.VOD () { VID = VID };
+                    Com.VOD mVOD = new Com.VOD() { VID = VID };
                     ent.VODs.Attach(mVOD);
                     ent.VODs.Remove(mVOD);
                     ent.SaveChanges();
@@ -286,7 +468,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.DeleteVOD, VID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.DeleteVOD, VID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -307,7 +492,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.DeleteVOD, DVID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.DeleteVOD, DVID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -326,7 +514,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateMovementTrainingContext, mMovementTrainingDetail.MTDID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateMovementTrainingContext, mMovementTrainingDetail.MTDID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -345,7 +536,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.UpdateMovementTrainingImgAddress, mMovementTrainingDetail.MTDID.ToString(), -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.UpdateMovementTrainingImgAddress, mMovementTrainingDetail.MTDID.ToString(), -100, e.Message);
+                }).Start();
                 return false;
             }
         }
@@ -362,7 +556,10 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Log.DoLog(Com.Common.Action.GetAllProduct, " ", -100, e.Message);
+                new System.Threading.Thread(delegate ()
+                {
+                    Log.DoLog(Com.Common.Action.GetAllProduct, " ", -100, e.Message);
+                }).Start();
                 return null;
             }
         }

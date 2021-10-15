@@ -276,6 +276,7 @@ namespace FitnessWebApp.Controllers
         {
             return BLL.Payment.GetPayByID(PayID);
         }
+
         [AcceptVerbs("Post")]
         [AllowAnonymous]
         public IHttpActionResult CallBackPayResult(HttpRequestMessage request)
@@ -309,8 +310,8 @@ namespace FitnessWebApp.Controllers
                     //chio to Db updte konam Akhe !
 
                     new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, payEndResult.BuyID, 2, "Bad END"); }).Start();
-                    // return Redirect("https://www.hasma.ir/payment/failed");
-                    return Redirect("wodex://purchase");
+                    return Redirect("https://wodex.app/paymentfailed/");
+                    //return Redirect("wodex://purchase");
 
                 }
                 else
@@ -350,14 +351,14 @@ namespace FitnessWebApp.Controllers
                 }
 
                 new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, payEndResult.BuyID, 1, "Happy END"); }).Start();
-                //  return Redirect("https://www.hasma.ir/payment/Success/" + payEndResult.TrackingNumber);
-                return Redirect("wodex://purchase");
+                return Redirect("https://wodex.app/paymentsuccess/" + payEndResult.TrackingNumber);
+                //return Redirect("wodex://purchase");
             }
             catch (Exception e)
             {
                 new System.Threading.Thread(delegate () { BLL.Log.DoLog(Com.Common.Action.CallBackPayResult, "payEndResult", -100, e.Message); }).Start();
-                //return Redirect("https://www.hasma.ir/payment/failed");
-                return Redirect("wodex://purchase");
+                return Redirect("https://wodex.app/paymentfailed/");
+                //return Redirect("wodex://purchase");
             }
         }
 
@@ -417,7 +418,7 @@ namespace FitnessWebApp.Controllers
                         return buyResult;
                     }
 
-                    string BuyID = "70000332" + DateTime.Now.ToString("MMddyyyyhmms");
+                    string BuyID = "70000340" + DateTime.Now.ToString("MMddyyyyhmms");
 
 
                     Com.PayResultRequested payResultRequested = PayStart(10000, BuyID);
@@ -443,7 +444,7 @@ namespace FitnessWebApp.Controllers
                         buyResult.PayID = resDB;
                         buyResult.MablagheKoleKharid = (long)SumPrice;
                         buyResult.HasError = false;
-                        buyResult.LinkPardakht = "http://www.poolban.ir/V2PayGate/Pool/StartPayRedirectww/" + payResultRequested.Result;
+                        buyResult.LinkPardakht = "https://www.poolban.ir/V2PayGate/Pool/StartPayRedirectww/" + payResultRequested.Result;
                         buyResult.StateDesc = "OK Successsssss hoooraaa";
                     }
                     else
@@ -479,9 +480,10 @@ namespace FitnessWebApp.Controllers
             {
                 Amount = Amount,
                 BuyID = BuyID,
-                CallBackURl = "http://193.105.234.83/fintness/Shop/CallBackPayResult",
+                //   CallBackURl = "https://193.105.234.83/fitness/Shop/CallBackPayResult",
+                CallBackURl = "https://wodex.app/fitness/Shop/CallBackPayResult",
                 Language = "fa",
-                TerminalNumber = "70000332"
+                TerminalNumber = "70000340"
             };
 
             var webClient = new WebClient();
@@ -489,7 +491,7 @@ namespace FitnessWebApp.Controllers
             webClient.Headers[HttpRequestHeader.ContentType] = "application/json;charset=utf-8";
             var rawMessage = JsonConvert.SerializeObject(mPayStart);
 
-            rawMessage = webClient.UploadString("http://www.poolban.ir/payGate/pay/SendCustomerToIPG", rawMessage);
+            rawMessage = webClient.UploadString("https://www.poolban.ir/payGate/pay/SendCustomerToIPG", rawMessage);
 
             var Result = JsonConvert.DeserializeObject<Com.PayResultRequested>(rawMessage);
 
@@ -504,7 +506,7 @@ namespace FitnessWebApp.Controllers
             webClient.Headers[HttpRequestHeader.ContentType] = "application/json;charset=utf-8";
             var rawMessage = JsonConvert.SerializeObject(mPayVerifiedData);
 
-            rawMessage = webClient.UploadString("http://www.poolban.ir/PayGate/pay/VerifiedCustomerForIPG", rawMessage);
+            rawMessage = webClient.UploadString("https://www.poolban.ir/PayGate/pay/VerifiedCustomerForIPG", rawMessage);
 
             var Result = JsonConvert.DeserializeObject<Com.PayFinalResult>(rawMessage);
 

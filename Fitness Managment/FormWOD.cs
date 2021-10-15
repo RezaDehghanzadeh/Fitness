@@ -16,17 +16,15 @@ namespace Fitness_Managment
     public partial class FormWOD : Form
     {
         private const int V = -1;
-        EvolvedVOD evolvedVOD;
+        Com.EvolvedVOD evolvedVOD;
 
-        // string BaseAddress = "http://localhost:56271/";
-        string BaseAddress = "https://www.hasma.ir/";
-        //string BaseAddress = "http://193.105.234.83:80/";
+        string BaseAddress = "http://193.105.234.83/";
 
         public FormWOD()
         {
             InitializeComponent();
-            evolvedVOD = new EvolvedVOD();
-            evolvedVOD.movs = new List<Mov>();
+            evolvedVOD = new Com.EvolvedVOD();
+            evolvedVOD.movs = new List<Com.Mov>();
         }
 
         private void FormWOD_Load(object sender, EventArgs e)
@@ -684,11 +682,11 @@ namespace Fitness_Managment
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Round round = new Round();
+            Com.Round round = new Com.Round();
 
             try
             {
-                round.RX = new RoundDetail()
+                round.RX = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox10.Text != "" ? float.Parse(textBox10.Text) : V,
                     AddToTotalTime = textBox8.Text != "" ? float.Parse(textBox8.Text) : V,
@@ -733,7 +731,7 @@ namespace Fitness_Managment
             }
             try
             {
-                round.R2 = new RoundDetail()
+                round.R2 = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox56.Text != "" ? float.Parse(textBox56.Text) : V,
                     AddToTotalTime = textBox58.Text != "" ? float.Parse(textBox58.Text) : V,
@@ -779,7 +777,7 @@ namespace Fitness_Managment
 
             try
             {
-                round.R3 = new RoundDetail()
+                round.R3 = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox90.Text != "" ? float.Parse(textBox90.Text) : V,
                     AddToTotalTime = textBox92.Text != "" ? float.Parse(textBox92.Text) : V,
@@ -826,12 +824,12 @@ namespace Fitness_Managment
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            Mov mov = new Mov();
+            Com.Mov mov = new Com.Mov();
             mov.KWeightScaled1 = textBox119.Text != "" ? float.Parse(textBox119.Text) : V;
             mov.MovementType = (string)comboBox10.SelectedItem;
             try
             {
-                mov.RX = new MovDetail()
+                mov.RX = new Com.MovDetail()
                 {
                     DistanceMale = textBox109.Text != "" ? float.Parse(textBox109.Text) : V,
                     HeightFeMale = textBox106.Text != "" ? float.Parse(textBox106.Text) : V,
@@ -884,7 +882,7 @@ namespace Fitness_Managment
                 var Call = textBox124.Text != "" ? float.Parse(textBox124.Text) : V;
                 var DistanceFeMale = textBox130.Text != "" ? float.Parse(textBox130.Text) : V;
 
-                mov.S2 = new MovDetail()
+                mov.S2 = new Com.MovDetail()
                 {
                     DistanceMale = textBox132.Text != "" ? float.Parse(textBox132.Text) : V,
                     HeightFeMale = textBox131.Text != "" ? float.Parse(textBox131.Text) : V,
@@ -916,7 +914,7 @@ namespace Fitness_Managment
 
             try
             {
-                mov.S3 = new MovDetail()
+                mov.S3 = new Com.MovDetail()
                 {
                     DistanceMale = textBox150.Text != "" ? float.Parse(textBox150.Text) : V,
                     HeightFeMale = textBox149.Text != "" ? float.Parse(textBox149.Text) : V,
@@ -2024,7 +2022,7 @@ namespace Fitness_Managment
 
         private async void button14_Click(object sender, EventArgs e)
         {
-            evolvedVOD.infoVOD = new InfoVOD()
+            evolvedVOD.infoVOD = new Com.InfoVOD()
             {
                 Description = richTextBoxDesc.Text,
                 EditType = listBox3.Items.Cast<String>().ToList(),
@@ -2042,8 +2040,8 @@ namespace Fitness_Managment
             try
             {
 
-                evolvedVOD.round = new Round();
-                evolvedVOD.round.RX = new RoundDetail()
+                evolvedVOD.round = new Com.Round();
+                evolvedVOD.round.RX = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox10.Text != "" ? float.Parse(textBox10.Text) : V,
                     AddToTotalTime = textBox8.Text != "" ? float.Parse(textBox8.Text) : V,
@@ -2089,7 +2087,7 @@ namespace Fitness_Managment
             }
             try
             {
-                evolvedVOD.round.R2 = new RoundDetail()
+                evolvedVOD.round.R2 = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox56.Text != "" ? float.Parse(textBox56.Text) : V,
                     AddToTotalTime = textBox58.Text != "" ? float.Parse(textBox58.Text) : V,
@@ -2135,7 +2133,7 @@ namespace Fitness_Managment
 
             try
             {
-                evolvedVOD.round.R3 = new RoundDetail()
+                evolvedVOD.round.R3 = new Com.RoundDetail()
                 {
                     AddToTotalRep = textBox90.Text != "" ? float.Parse(textBox90.Text) : V,
                     AddToTotalTime = textBox92.Text != "" ? float.Parse(textBox92.Text) : V,
@@ -2213,6 +2211,10 @@ namespace Fitness_Managment
                     using (var form = new MultipartFormDataContent())
                     {
                         StringContent contentBody = new StringContent(JsonConvert.SerializeObject(mVOD));
+
+                        string cc = JsonConvert.SerializeObject(mVOD);
+                        Console.WriteLine(cc);
+
                         form.Add(contentBody, "Object");
 
                         ImageConverter imgConverter = new ImageConverter();
@@ -2241,7 +2243,7 @@ namespace Fitness_Managment
         {
             try
             {
-                InfoVOD infoVOD = new InfoVOD()
+                Com.InfoVOD infoVOD = new Com.InfoVOD()
                 {
                     Description = richTextBoxDesc.Text,
                     EditType = listBox3.Items.Cast<String>().ToList(),
@@ -2326,98 +2328,5 @@ namespace Fitness_Managment
         }
     }
 
-    public class InfoVOD
-    {
-        public string VODName { get; set; }
-        public string NameAndFamilyName { get; set; }
-        public string Description { get; set; }
-        public string ManualProgram { get; set; }
-        public List<string> EditType { get; set; }
-        public List<string> Special { get; set; }
-        public List<string> Pattern { get; set; }
-        public List<string> Type { get; set; }
-        public List<string> EnergyPath { get; set; }
-        public List<string> PublicSkill { get; set; }
-        public List<string> Time { get; set; }
-    }
-    public class Round
-    {
-        public RoundDetail RX { get; set; }
-        public RoundDetail R2 { get; set; }
-        public RoundDetail R3 { get; set; }
-    }
-    public class RoundDetail
-    {
-        public float FTRound { get; set; }
-        public float AMRAP { get; set; }
-        public float TSet { get; set; }
-        public float CapTime { get; set; }
-        public float TRound { get; set; }
-        public float TWork { get; set; }
-        public float TimeRest { get; set; }
-        public float TimeEvery { get; set; }
-        public float TimeFor { get; set; }
-        public float RestBetMov { get; set; }
-        public float RestBetSet { get; set; }
-        public float RestBetRep { get; set; }
-        public float AddToTotalTime { get; set; }
-        public float AddToTotalRep { get; set; }
-        public float R1 { get; set; }
-        public float R2 { get; set; }
-        public float R3 { get; set; }
-        public float R4 { get; set; }
-        public float R5 { get; set; }
-        public float R6 { get; set; }
-        public float R7 { get; set; }
-        public float R8 { get; set; }
-        public float R9 { get; set; }
-        public float R10 { get; set; }
-        public float R11 { get; set; }
-        public float R12 { get; set; }
-        public float R13 { get; set; }
-        public float R14 { get; set; }
-        public float R15 { get; set; }
-        public float R16 { get; set; }
-        public float R17 { get; set; }
-        public float R18 { get; set; }
-        public float R19 { get; set; }
-        public float R20 { get; set; }
-    }
-    public class Mov
-    {
-        public string MovementType { get; set; }
-        public float KWeightScaled1 { get; set; }
-        public MovDetail RX { get; set; }
-        public MovDetail S2 { get; set; }
-        public MovDetail S3 { get; set; }
-    }
-    public class MovDetail
-    {
-        public string Part { get; set; }
-        public string SubPart { get; set; }
-        public string Movement { get; set; }
-        public float WeightMale { get; set; }
-        public float WeightFeMale { get; set; }
-        public float HeightMale { get; set; }
-        public float HeightFeMale { get; set; }
-        public float DistanceMale { get; set; }
-        public float DistanceFeMale { get; set; }
-        public float TimeMale { get; set; }
-        public float TimeFeMale { get; set; }
-        public float MWork { get; set; }
-        public float MRest { get; set; }
-        public float MRound { get; set; }
-        public float Call { get; set; }
-        public float MRestBetSet { get; set; }
-        public float RestBet { get; set; }
-        public float MSet { get; set; }
-        public float Rep { get; set; }
-    }
-
-    public class EvolvedVOD
-    {
-        public InfoVOD infoVOD { get; set; }
-        public Round round { get; set; }
-        public List<Mov> movs { get; set; }
-    }
+  
 }

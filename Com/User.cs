@@ -38,5 +38,12 @@ namespace Com
         public string CodePosti { get; set; }
         public string City { get; set; }
         public string Ostan { get; set; }
+        public string Username { get; set; }
+        public Nullable<System.DateTime> Birthdat { get; set; }
+        public Nullable<bool> Sex { get; set; }
+        public Nullable<int> ScreenMode { get; set; }
+        public Nullable<double> RCBackSquat { get; set; }
+        public Nullable<double> RCPullUp { get; set; }
+        public Nullable<double> RCRun { get; set; }
     }
 }
